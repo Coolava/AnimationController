@@ -32,6 +32,9 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 	Static_Animation animation_;
+	Static_Animation animation2_;
+	Static_Animation animation3_;
+	Static_Animation animation4_;
 public:
 	afx_msg void OnBnClickedButtonAnimation();
 };

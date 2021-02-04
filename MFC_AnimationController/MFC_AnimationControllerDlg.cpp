@@ -27,6 +27,10 @@ void CMFCAnimationControllerDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_STATIC_ANIMATION, animation_);
+	DDX_Control(pDX, IDC_STATIC_ANIMATION2, animation2_);
+	DDX_Control(pDX, IDC_STATIC_ANIMATION3, animation3_);
+	DDX_Control(pDX, IDC_STATIC_ANIMATION4, animation4_);
+	
 }
 
 BEGIN_MESSAGE_MAP(CMFCAnimationControllerDlg, CDialogEx)
@@ -47,6 +51,7 @@ BOOL CMFCAnimationControllerDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// 큰 아이콘을 설정합니다.
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
+	SetBackgroundColor(RGB(45, 45, 48));
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
 

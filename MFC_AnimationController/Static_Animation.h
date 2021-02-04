@@ -1,7 +1,55 @@
 #pragma once
 #include <afxwin.h>
 #include <gdiplus.h>
+#include <memory>
 #pragma comment (lib,"Gdiplus.lib")
+
+class OleFactoryClass
+{
+public:
+    static OleFactoryClass& getInstance()
+    {
+        if (destroyed)
+        {
+            new(_instance) OleFactoryClass;
+            atexit(destroy);
+            destroyed = false;
+
+        }
+        else if (_instance == nullptr)
+        {
+            create();
+        }
+        return *_instance;
+    }
+
+private:
+    static OleFactoryClass* _instance;
+    static bool destroyed;
+    OleFactoryClass() {
+        AfxOleInit();
+        destroyed = false;
+    };
+
+    ~OleFactoryClass(){
+        AfxOleTerm(FALSE);
+        destroyed = true;
+    }
+
+    static void create()
+    {
+        static OleFactoryClass instance;
+        _instance = &instance;
+    }
+
+    static void destroy()
+    {
+        _instance->~OleFactoryClass();
+    }
+
+};
+
+
 
 class Static_Animation :
     public CWnd
@@ -12,6 +60,8 @@ public:
 
 
 private:
+    static OleFactoryClass _oleFactory;
+
     ULONG_PTR m_gdiplusToken;
     Gdiplus::GdiplusStartupInput gdiplusStartupInput;
 

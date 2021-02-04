@@ -1,24 +1,26 @@
 #include "pch.h"
 #include "Static_Animation.h"
 
+
+bool OleFactoryClass::destroyed;
+OleFactoryClass* OleFactoryClass::_instance;
+
 Static_Animation::Static_Animation()
 {
 	GdiplusStartup(&m_gdiplusToken, &gdiplusStartupInput, NULL);
 
-	if (!AfxOleInit())
-	{
-	}
+	_oleFactory.getInstance();
+
 	animation_controller_.SetRelatedWnd(this);
 	animation_controller_.EnableAnimationTimerEventHandler();
 
-	ChangeState(State::Hover, background_, RGB(62, 62, 64));
+	//ChangeState(State::Hover, background_, RGB(62, 62, 64));
 
 }
 
 Static_Animation::~Static_Animation()
 {
 	Gdiplus::GdiplusShutdown(m_gdiplusToken);
-	AfxOleTerm(FALSE);
 }
 BEGIN_MESSAGE_MAP(Static_Animation, CWnd)
 	ON_WM_MOUSELEAVE()
@@ -96,7 +98,7 @@ void Static_Animation::OnMouseHover(UINT nFlags, CPoint point)
 	if( state_ != State::Hover && state_ != State::LClick)
 	{
 
-		//ChangeState(State::Hover, background_, RGB(62, 62, 64));
+		ChangeState(State::Hover, background_, RGB(62, 62, 64));
 
 	}
 	CWnd::OnMouseHover(nFlags, point);
@@ -105,9 +107,7 @@ void Static_Animation::OnMouseHover(UINT nFlags, CPoint point)
 
 void Static_Animation::OnLButtonDown(UINT nFlags, CPoint point)
 {
-
-	animation_controller_.ScheduleGroup(1,0.01);
-	//ChangeState(State::LClick, RGB(62, 62, 64),RGB(0,122,204));
+	ChangeState(State::LClick, RGB(62, 62, 64),RGB(0,122,204));
 	
 	CWnd::OnLButtonDown(nFlags, point);
 }
@@ -119,9 +119,9 @@ void Static_Animation::ChangeState(State state, COLORREF default_color, COLORREF
 	animation_controller_.CleanUpGroup(1);
 
 	animation_color_ = default_color;
-	animation_color_.AddTransition(new CAccelerateDecelerateTransition(0.1, GetRValue(target_color)),
-		new CAccelerateDecelerateTransition(0.1, GetGValue(target_color)),
-		new CAccelerateDecelerateTransition(0.1, GetBValue(target_color)));
+	animation_color_.AddTransition(new CAccelerateDecelerateTransition(0.2, GetRValue(target_color)),
+		new CAccelerateDecelerateTransition(0.2, GetGValue(target_color)),
+		new CAccelerateDecelerateTransition(0.2, GetBValue(target_color)));
 
 	animation_color_.SetID(0, 1);
 	animation_controller_.AddAnimationObject(&animation_color_);
