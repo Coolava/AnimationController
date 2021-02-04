@@ -9,44 +9,24 @@ class OleFactoryClass
 public:
     static OleFactoryClass& getInstance()
     {
-        if (destroyed)
+        if( _instance == nullptr)
         {
-            new(_instance) OleFactoryClass;
-            atexit(destroy);
-            destroyed = false;
+            static OleFactoryClass instance;
+            _instance = &instance;
+        }
 
-        }
-        else if (_instance == nullptr)
-        {
-            create();
-        }
         return *_instance;
     }
 
 private:
     static OleFactoryClass* _instance;
-    static bool destroyed;
     OleFactoryClass() {
         AfxOleInit();
-        destroyed = false;
     };
 
     ~OleFactoryClass(){
         AfxOleTerm(FALSE);
-        destroyed = true;
     }
-
-    static void create()
-    {
-        static OleFactoryClass instance;
-        _instance = &instance;
-    }
-
-    static void destroy()
-    {
-        _instance->~OleFactoryClass();
-    }
-
 };
 
 

@@ -2,8 +2,7 @@
 #include "Static_Animation.h"
 
 
-bool OleFactoryClass::destroyed;
-OleFactoryClass* OleFactoryClass::_instance;
+OleFactoryClass* OleFactoryClass::_instance = nullptr;
 
 Static_Animation::Static_Animation()
 {
