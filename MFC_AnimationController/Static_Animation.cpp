@@ -61,6 +61,8 @@ void Static_Animation::OnPaint()
 	GetClientRect(rc);
 
 	Gdiplus::Graphics graphics(dc);
+
+	/*Initialize buffer bitmap */
 	Gdiplus::Bitmap memBmp(rc.Width(), rc.Height());
 	Gdiplus::Graphics memG(&memBmp);
 

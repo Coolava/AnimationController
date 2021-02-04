@@ -58,7 +58,6 @@ public:
     Static_Animation();
     virtual ~Static_Animation();
 
-
 private:
     static OleFactoryClass _oleFactory;
 
@@ -70,7 +69,7 @@ private:
     CAnimationController animation_controller_;
 
     enum State : int { Leave, Hover, LClick };
-    State state_ = Leave;
+    State state_ = State::Leave;
     bool mouse_leave_ = true;
     COLORREF background_ = RGB(45, 45, 48);
 
