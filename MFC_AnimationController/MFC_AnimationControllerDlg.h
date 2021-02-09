@@ -31,10 +31,10 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 
-	Static_Animation animation_;
-	Static_Animation animation2_;
-	Static_Animation animation3_;
-	Static_Animation animation4_;
+	Button_Animation animation_;
+	Button_Animation animation2_;
+	Button_Animation animation3_;
+	Button_Animation animation4_;
 public:
 	afx_msg void OnBnClickedButtonAnimation();
 };

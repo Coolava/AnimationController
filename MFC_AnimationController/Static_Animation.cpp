@@ -4,7 +4,7 @@
 
 OleFactoryClass* OleFactoryClass::_instance = nullptr;
 
-Static_Animation::Static_Animation()
+Button_Animation::Button_Animation()
 {
 	GdiplusStartup(&m_gdiplusToken, &gdiplusStartupInput, NULL);
 
@@ -12,26 +12,22 @@ Static_Animation::Static_Animation()
 
 	animation_controller_.SetRelatedWnd(this);
 	animation_controller_.EnableAnimationTimerEventHandler();
-
-	//ChangeState(State::Hover, background_, RGB(62, 62, 64));
-
 }
 
-Static_Animation::~Static_Animation()
+Button_Animation::~Button_Animation()
 {
 	Gdiplus::GdiplusShutdown(m_gdiplusToken);
 }
-BEGIN_MESSAGE_MAP(Static_Animation, CWnd)
+BEGIN_MESSAGE_MAP(Button_Animation, CWnd)
 	ON_WM_MOUSELEAVE()
-//	ON_WM_NCPAINT()
-ON_WM_PAINT()
-ON_WM_MOUSEMOVE()
-ON_WM_MOUSEHOVER()
-ON_WM_LBUTTONDOWN()
+	ON_WM_PAINT()
+	ON_WM_MOUSEMOVE()
+	ON_WM_MOUSEHOVER()
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 
-void Static_Animation::OnMouseMove(UINT nFlags, CPoint point)
+void Button_Animation::OnMouseMove(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	TRACKMOUSEEVENT tme;
@@ -45,14 +41,14 @@ void Static_Animation::OnMouseMove(UINT nFlags, CPoint point)
 	CWnd::OnMouseMove(nFlags, point);
 }
 
-void Static_Animation::OnMouseLeave()
+void Button_Animation::OnMouseLeave()
 {	
 	state_ = State::Leave;
 	Invalidate();
 	CWnd::OnMouseLeave();
 }
 
-void Static_Animation::OnPaint()
+void Button_Animation::OnPaint()
 {
 	CPaintDC dc(this);
 
@@ -94,7 +90,7 @@ void Static_Animation::OnPaint()
 	graphics.DrawImage(&memBmp, 0, 0);
 }
 
-void Static_Animation::OnMouseHover(UINT nFlags, CPoint point)
+void Button_Animation::OnMouseHover(UINT nFlags, CPoint point)
 {
 	if( state_ != State::Hover && state_ != State::LClick)
 	{
@@ -106,7 +102,7 @@ void Static_Animation::OnMouseHover(UINT nFlags, CPoint point)
 }
 
 
-void Static_Animation::OnLButtonDown(UINT nFlags, CPoint point)
+void Button_Animation::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	ChangeState(State::LClick, RGB(62, 62, 64),RGB(0,122,204));
 	
@@ -114,7 +110,7 @@ void Static_Animation::OnLButtonDown(UINT nFlags, CPoint point)
 }
 
 
-void Static_Animation::ChangeState(State state, COLORREF default_color, COLORREF target_color)
+void Button_Animation::ChangeState(State state, COLORREF default_color, COLORREF target_color)
 {
 	state_ = state;
 	animation_controller_.CleanUpGroup(1);

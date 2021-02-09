@@ -31,12 +31,12 @@ private:
 
 
 
-class Static_Animation :
+class Button_Animation :
     public CWnd
 {
 public:
-    Static_Animation();
-    virtual ~Static_Animation();
+    Button_Animation();
+    virtual ~Button_Animation();
 
 private:
     static OleFactoryClass _oleFactory;
