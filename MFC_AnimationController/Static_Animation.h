@@ -4,6 +4,8 @@
 #include <memory>
 #pragma comment (lib,"Gdiplus.lib")
 
+
+/*AfxOleInit must be initialize once.*/
 class OleFactoryClass
 {
 public:

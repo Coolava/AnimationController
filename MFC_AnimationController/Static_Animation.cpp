@@ -247,7 +247,7 @@ void Circle_Progress::OnPaint()
 		clr = ballColor_;
 		animation_degree_.GetValue(degree);
 
-		if (degree == (360+ 30 * ballCount_))
+		if (degree == (360 + 30 * ballCount_))
 		{
 			start();
 		}
