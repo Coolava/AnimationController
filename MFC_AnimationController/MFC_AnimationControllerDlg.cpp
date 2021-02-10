@@ -37,6 +37,7 @@ BEGIN_MESSAGE_MAP(CMFCAnimationControllerDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON_ANIMATION, &CMFCAnimationControllerDlg::OnBnClickedButtonAnimation)
+	ON_STN_CLICKED(IDC_STATIC_ANIMATION, &CMFCAnimationControllerDlg::OnStnClickedStaticAnimation)
 END_MESSAGE_MAP()
 
 
@@ -96,4 +97,10 @@ HCURSOR CMFCAnimationControllerDlg::OnQueryDragIcon()
 void CMFCAnimationControllerDlg::OnBnClickedButtonAnimation()
 {
 
+}
+
+
+void CMFCAnimationControllerDlg::OnStnClickedStaticAnimation()
+{
+	animation4_.start();
 }

@@ -34,7 +34,8 @@ protected:
 	Button_Animation animation_;
 	Button_Animation animation2_;
 	Button_Animation animation3_;
-	Button_Animation animation4_;
+	Circle_Progress animation4_;
 public:
 	afx_msg void OnBnClickedButtonAnimation();
+	afx_msg void OnStnClickedStaticAnimation();
 };
