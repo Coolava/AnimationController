@@ -36,9 +36,12 @@ public:
     Circle_Progress();
     virtual ~Circle_Progress();
 
+    enum class State : int { Stop, InProgress };
     void setBackGroundColor(COLORREF color);
     void setInnerColor(COLORREF color);
     void setAnimationSeconds(double seconds);
+    void setBallCount(int count);
+    void setBallSize(double size);
 
     void start();
     void stop();
@@ -55,12 +58,18 @@ private:
     COLORREF ballColor_ = RGB(255, 255, 255);
     double seconds_ = 2.0;
 
+    int ballCount_ = 3;
+    double ballSize_ = 8;
 
-    enum class State : int { Stop, InProgress };
     State state_ = State::Stop;
 public:
     DECLARE_MESSAGE_MAP()
     afx_msg void OnPaint();
+
+public:
+    State getState() {
+        return state_;
+    }
 };
 
 class Button_Animation :

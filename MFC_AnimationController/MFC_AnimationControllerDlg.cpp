@@ -36,7 +36,6 @@ void CMFCAnimationControllerDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CMFCAnimationControllerDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_BUTTON_ANIMATION, &CMFCAnimationControllerDlg::OnBnClickedButtonAnimation)
 	ON_STN_CLICKED(IDC_STATIC_ANIMATION, &CMFCAnimationControllerDlg::OnStnClickedStaticAnimation)
 END_MESSAGE_MAP()
 
@@ -92,15 +91,10 @@ HCURSOR CMFCAnimationControllerDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-
-
-void CMFCAnimationControllerDlg::OnBnClickedButtonAnimation()
-{
-
-}
-
-
 void CMFCAnimationControllerDlg::OnStnClickedStaticAnimation()
 {
-	animation4_.start();
+	if (animation4_.getState() == Circle_Progress::State::InProgress)
+		animation4_.stop();
+	else
+		animation4_.start();
 }

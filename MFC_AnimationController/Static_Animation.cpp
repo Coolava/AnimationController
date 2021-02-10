@@ -177,6 +177,16 @@ void Circle_Progress::setAnimationSeconds(double seconds)
 	seconds_ = seconds;
 }
 
+void Circle_Progress::setBallCount(int count)
+{
+	ballCount_ = count;
+}
+
+void Circle_Progress::setBallSize(double size)
+{
+	ballSize_ = size;
+}
+
 void Circle_Progress::start()
 {
 	state_ = State::InProgress;
@@ -184,7 +194,7 @@ void Circle_Progress::start()
 
 	animation_degree_ = 0;
 	animation_degree_.AddTransition(
-		new CSinusoidalTransitionFromRange(seconds_, 0, 430, seconds_ * 2, UI_ANIMATION_SLOPE::UI_ANIMATION_SLOPE_DECREASING));
+		new CSinusoidalTransitionFromRange(seconds_, 0, 360 + 30 * ballCount_, seconds_ * 2, UI_ANIMATION_SLOPE::UI_ANIMATION_SLOPE_DECREASING));
 
 	animation_degree_.SetID(0, 1);
 
@@ -196,6 +206,7 @@ void Circle_Progress::start()
 
 void Circle_Progress::stop()
 {
+	state_ = State::Stop;
 }
 BEGIN_MESSAGE_MAP(Circle_Progress, CWnd)
 	ON_WM_PAINT()
@@ -236,7 +247,7 @@ void Circle_Progress::OnPaint()
 		clr = ballColor_;
 		animation_degree_.GetValue(degree);
 
-		if (degree == 430)
+		if (degree == (360+ 30 * ballCount_))
 		{
 			start();
 		}
@@ -244,27 +255,25 @@ void Circle_Progress::OnPaint()
 
 	Gdiplus::SolidBrush brushEllipse(Gdiplus::Color(GetRValue(clr), GetGValue(clr), GetBValue(clr)));
 
-
-
 	CPoint center = rc.CenterPoint();
 
 	int radius = (rc.Width() > rc.Height() ? rc.Height() / 2 : rc.Width() / 2)*0.7;
 
 	constexpr double pi = 3.141592653589793238462643383279502884L;
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < ballCount_; i++)
 	{
 		if ((degree > 0) && (degree < 360))
 		{
 			Gdiplus::PointF pt(
-				center.x + radius * sin(degree * pi / 180)
-				, center.y - radius * cos(degree * pi / 180)
+				center.x + radius * sin(degree * pi / 180) ,
+				center.y - radius * cos(degree * pi / 180)
 			);
 
-			memG.FillEllipse(&brushEllipse, Gdiplus::RectF(pt.X, pt.Y, 8, 8));
+			memG.FillEllipse(&brushEllipse, Gdiplus::RectF(pt.X - ballSize_ / 2, pt.Y - ballSize_ / 2, ballSize_, ballSize_));
 		}
 
-		degree -= 20;
+		degree -= 30;
 	}
 	
 
