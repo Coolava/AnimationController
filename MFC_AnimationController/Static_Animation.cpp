@@ -1,14 +1,15 @@
 #include "pch.h"
 #include "Static_Animation.h"
+#include "OleFactory.h"
 #include <math.h>
 #define _USE_MATH_DEFINES
-OleFactoryClass* OleFactoryClass::instance_ = nullptr;
 
 Button_Animation::Button_Animation()
 {
+	OleFactoryClass::getInstance();
+
 	GdiplusStartup(&gdiplusToken_, &gdiplusStartupInput_, NULL);
 
-	oleFactory_.getInstance();
 
 	animation_controller_.SetRelatedWnd(this);
 	animation_controller_.EnableAnimationTimerEventHandler();
@@ -151,7 +152,7 @@ Circle_Progress::Circle_Progress()
 {
 	GdiplusStartup(&gdiplusToken_, &gdiplusStartupInput_, NULL);
 
-	oleFactory_.getInstance();
+	OleFactoryClass::getInstance();
 
 	animation_controller_.SetRelatedWnd(this);
 	animation_controller_.EnableAnimationTimerEventHandler();
@@ -194,7 +195,7 @@ void Circle_Progress::start()
 
 	animation_degree_ = 0;
 	animation_degree_.AddTransition(
-		new CSinusoidalTransitionFromRange(seconds_, 0, 360 + 30 * ballCount_, seconds_ * 2, UI_ANIMATION_SLOPE::UI_ANIMATION_SLOPE_DECREASING));
+		new CSinusoidalTransitionFromRange(seconds_, 0, 360.0 + (30.0 * ballCount_), seconds_ * 2, UI_ANIMATION_SLOPE::UI_ANIMATION_SLOPE_DECREASING));
 
 	animation_degree_.SetID(0, 1);
 
@@ -247,7 +248,7 @@ void Circle_Progress::OnPaint()
 		clr = ballColor_;
 		animation_degree_.GetValue(degree);
 
-		if (degree == (360 + 30 * ballCount_))
+		if (degree == (360.0 + 30.0 * ballCount_))
 		{
 			start();
 		}
@@ -263,17 +264,17 @@ void Circle_Progress::OnPaint()
 
 	for (int i = 0; i < ballCount_; i++)
 	{
-		if ((degree > 0) && (degree < 360))
+		if ((degree > 0.0) && (degree < 360.0))
 		{
 			Gdiplus::PointF pt(
-				center.x + radius * sin(degree * pi / 180) ,
-				center.y - radius * cos(degree * pi / 180)
+				center.x + radius * sin(degree * pi / 180.0) ,
+				center.y - radius * cos(degree * pi / 180.0)
 			);
 
 			memG.FillEllipse(&brushEllipse, Gdiplus::RectF(pt.X - ballSize_ / 2, pt.Y - ballSize_ / 2, ballSize_, ballSize_));
 		}
 
-		degree -= 30;
+		degree -= 30.0;
 	}
 	
 

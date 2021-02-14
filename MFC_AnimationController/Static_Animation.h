@@ -4,32 +4,7 @@
 #include <memory>
 #pragma comment (lib,"Gdiplus.lib")
 
-
-/*AfxOleInit must be initialize once.*/
-class OleFactoryClass
-{
-public:
-    static OleFactoryClass& getInstance()
-    {
-        if( instance_ == nullptr)
-        {
-            static OleFactoryClass instance;
-            instance_ = &instance;
-        }
-
-        return *instance_;
-    }
-
-private:
-    static OleFactoryClass* instance_;
-    OleFactoryClass() {
-        AfxOleInit();
-    };
-
-    ~OleFactoryClass(){
-        AfxOleTerm(FALSE);
-    }
-};
+class OleFactoryClass;
 
 class Circle_Progress :
     public CWnd
@@ -48,7 +23,6 @@ public:
     void start();
     void stop();
 private:
-    static OleFactoryClass oleFactory_;
 
     ULONG_PTR gdiplusToken_;
     Gdiplus::GdiplusStartupInput gdiplusStartupInput_;
@@ -87,7 +61,6 @@ public:
     void setClickColor(COLORREF color);
     void setAnimationSeconds(double seconds);
 private:
-    static OleFactoryClass oleFactory_;
 
     ULONG_PTR gdiplusToken_;
     Gdiplus::GdiplusStartupInput gdiplusStartupInput_;

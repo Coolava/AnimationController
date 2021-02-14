@@ -186,6 +186,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="MFC_AnimationController.h" />
     <ClInclude Include="MFC_AnimationControllerDlg.h" />
+    <ClInclude Include="OleFactory.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Static_Animation.h" />
