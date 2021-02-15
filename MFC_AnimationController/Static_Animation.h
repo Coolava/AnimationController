@@ -1,7 +1,6 @@
 #pragma once
 #include <afxwin.h>
 #include <gdiplus.h>
-#include <memory>
 #pragma comment (lib,"Gdiplus.lib")
 
 class Circle_Progress :
