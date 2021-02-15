@@ -2,11 +2,11 @@
 #include <afxwin.h>
 #include <gdiplus.h>
 #pragma comment (lib,"Gdiplus.lib")
-#include "OleControl.h"
+#include "OleInitializer.h"
 
 
 class Button_Animation :
-    public OleControl
+    public OleInitializer, public CWnd
 {
 public:
     Button_Animation();

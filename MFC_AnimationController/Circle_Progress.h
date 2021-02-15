@@ -1,11 +1,11 @@
 #pragma once
 #include <afxwin.h>
-#include "OleControl.h"
+#include "OleInitializer.h"
 #include <gdiplus.h>
 #pragma comment (lib,"Gdiplus.lib")
 
 class Circle_Progress :
-    public OleControl
+    public OleInitializer, public CWnd
 {
 public:
     Circle_Progress();

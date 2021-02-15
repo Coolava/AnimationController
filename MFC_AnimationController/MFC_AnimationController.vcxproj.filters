@@ -45,8 +45,11 @@
     <ClInclude Include="Circle_Progress.h">
       <Filter>Animation Control</Filter>
     </ClInclude>
-    <ClInclude Include="OleControl.h">
-      <Filter>Header</Filter>
+    <ClInclude Include="OleInitializer.h">
+      <Filter>Animation Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialog_Animation.h">
+      <Filter>Animation Control</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -65,8 +68,11 @@
     <ClCompile Include="Circle_Progress.cpp">
       <Filter>Animation Control</Filter>
     </ClCompile>
-    <ClCompile Include="OleControl.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="OleInitializer.cpp">
+      <Filter>Animation Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialog_Animation.cpp">
+      <Filter>Animation Control</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
