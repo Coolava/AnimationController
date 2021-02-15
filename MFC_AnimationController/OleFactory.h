@@ -1,6 +1,5 @@
 #pragma once
-#include <gdiplus.h>
-#pragma comment (lib,"Gdiplus.lib")
+#include <afxdisp.h>
 
 /*AfxOleInit must be initialize once.*/
 class OleFactoryClass
