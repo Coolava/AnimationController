@@ -4,8 +4,6 @@
 #include <memory>
 #pragma comment (lib,"Gdiplus.lib")
 
-class OleFactoryClass;
-
 class Circle_Progress :
     public CWnd
 {
