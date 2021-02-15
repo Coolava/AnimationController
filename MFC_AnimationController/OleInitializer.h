@@ -2,11 +2,10 @@
 #include <afxwin.h>
 #include "OleFactory.h"
 
-class OleControl :
-    public CWnd
+class OleInitializer 
 {
 public:
-    OleControl()
+    OleInitializer()
     {
         OleFactoryClass::getInstance();
     }

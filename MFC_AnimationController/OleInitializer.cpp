@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "OleControl.h"
+#include "OleInitializer.h"
 
 
 OleFactoryClass* OleFactoryClass::instance_ = nullptr;
