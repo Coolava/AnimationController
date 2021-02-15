@@ -36,11 +36,17 @@
     <ClInclude Include="pch.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="Static_Animation.h">
-      <Filter>Animation Control</Filter>
-    </ClInclude>
     <ClInclude Include="OleFactory.h">
       <Filter>Animation Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Button_Animation.h">
+      <Filter>Animation Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle_Progress.h">
+      <Filter>Animation Control</Filter>
+    </ClInclude>
+    <ClInclude Include="OleControl.h">
+      <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -53,8 +59,14 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Static_Animation.cpp">
+    <ClCompile Include="Button_Animation.cpp">
       <Filter>Animation Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle_Progress.cpp">
+      <Filter>Animation Control</Filter>
+    </ClCompile>
+    <ClCompile Include="OleControl.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

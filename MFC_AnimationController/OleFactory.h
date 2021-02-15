@@ -26,5 +26,3 @@ class OleFactoryClass
         AfxOleTerm(FALSE);
     }
 };
-
-OleFactoryClass* OleFactoryClass::instance_ = nullptr;

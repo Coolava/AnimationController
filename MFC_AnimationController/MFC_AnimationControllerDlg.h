@@ -3,7 +3,8 @@
 //
 
 #pragma once
-#include "Static_Animation.h"
+#include "Button_Animation.h"
+#include "Circle_Progress.h"
 
 // CMFCAnimationControllerDlg 대화 상자
 class CMFCAnimationControllerDlg : public CDialogEx
@@ -36,6 +37,5 @@ protected:
 	Button_Animation animation3_;
 	Circle_Progress animation4_;
 public:
-	afx_msg void OnBnClickedButtonAnimation();
 	afx_msg void OnStnClickedStaticAnimation();
 };
