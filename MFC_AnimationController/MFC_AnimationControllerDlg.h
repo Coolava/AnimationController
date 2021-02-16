@@ -5,6 +5,8 @@
 #pragma once
 #include "Button_Animation.h"
 #include "Circle_Progress.h"
+#include "Dialog_Animation.h"
+#include <memory>
 
 // CMFCAnimationControllerDlg 대화 상자
 class CMFCAnimationControllerDlg : public CDialogEx
@@ -36,6 +38,10 @@ protected:
 	Button_Animation animation2_;
 	Button_Animation animation3_;
 	Circle_Progress animation4_;
+
+	std::unique_ptr<Dialog_Animation> dialog_animation_;
+
 public:
 	afx_msg void OnStnClickedStaticAnimation();
+	afx_msg void OnStnClickedStaticAnimation2();
 };

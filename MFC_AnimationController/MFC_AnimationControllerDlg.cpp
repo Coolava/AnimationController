@@ -37,6 +37,7 @@ BEGIN_MESSAGE_MAP(CMFCAnimationControllerDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_STN_CLICKED(IDC_STATIC_ANIMATION, &CMFCAnimationControllerDlg::OnStnClickedStaticAnimation)
+	ON_STN_CLICKED(IDC_STATIC_ANIMATION2, &CMFCAnimationControllerDlg::OnStnClickedStaticAnimation2)
 END_MESSAGE_MAP()
 
 
@@ -50,6 +51,9 @@ BOOL CMFCAnimationControllerDlg::OnInitDialog()
 	//  프레임워크가 이 작업을 자동으로 수행합니다.
 	SetIcon(m_hIcon, TRUE);			// 큰 아이콘을 설정합니다.
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
+
+
+	dialog_animation_ = std::make_unique<Dialog_Animation>();
 
 	SetBackgroundColor(RGB(45, 45, 48));
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
@@ -97,4 +101,19 @@ void CMFCAnimationControllerDlg::OnStnClickedStaticAnimation()
 		animation4_.stop();
 	else
 		animation4_.start();
+}
+
+
+void CMFCAnimationControllerDlg::OnStnClickedStaticAnimation2()
+{
+	if (dialog_animation_->IsWindowVisible())
+	{
+		dialog_animation_->ShowWindow(SW_HIDE);
+	}
+	else
+	{
+		dialog_animation_->ShowWindow(SW_SHOW);
+	}
+	// TODO: Add your control notification handler code here
+
 }
