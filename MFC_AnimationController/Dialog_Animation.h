@@ -4,7 +4,32 @@
 class Dialog_Animation :
     public CDialogEx, public OleInitializer
 {
+	DECLARE_DYNAMIC(Dialog_Animation)
+
 public:
-    Dialog_Animation();
+	Dialog_Animation(CWnd* pParent = nullptr);   // standard constructor
+	virtual ~Dialog_Animation();
+
+	// Dialog Data
+#ifdef AFX_DESIGN_TIME
+	enum { IDD = IDD_DIALOG_ANIMATION };
+#endif
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+
+	CAnimationController animation_controller_;
+	CAnimationRect animation_rect_;
+	CRect target_;
+
+	enum class State : int { Stop, Move };
+	State state_ = State::Stop;
+
+	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedButtonLeft();
+	afx_msg void OnBnClickedButtonRight();
+	afx_msg void OnPaint();
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 };
 
