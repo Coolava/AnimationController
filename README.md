@@ -1,6 +1,6 @@
 # MFC_AnimationController
 
-![mfc_animationController](https://user-images.githubusercontent.com/45839935/106853851-b25b0280-66fd-11eb-9007-95f92498d84f.gif)
+![mfc_animationController](https://user-images.githubusercontent.com/45839935/108186894-417e0680-7151-11eb-9cc0-bb780eb95bf3.gif)
 
 Now, You can use Animation on MFC Applicaion. 
 
