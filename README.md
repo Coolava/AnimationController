@@ -2,11 +2,12 @@
 
 ![mfc_animationController](https://user-images.githubusercontent.com/45839935/108186894-417e0680-7151-11eb-9cc0-bb780eb95bf3.gif)
 
-Now, You can use Animation on MFC Applicaion. 
+## Contents
+* Button
+* Circle Progress
 
-It is button example. 
+## Next
+* Dialog
 
-If you apply this, you can do resize or move controls.
-
-See [CAnimationController](https://docs.microsoft.com/ko-kr/cpp/mfc/reference/canimationcontroller-class?view=msvc-160) on MSDN.
+If you need more information about Animation in MFC Application, See [CAnimationController](https://docs.microsoft.com/ko-kr/cpp/mfc/reference/canimationcontroller-class?view=msvc-160) on MSDN.
 
