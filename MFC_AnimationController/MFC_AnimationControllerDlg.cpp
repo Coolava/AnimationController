@@ -55,6 +55,8 @@ BOOL CMFCAnimationControllerDlg::OnInitDialog()
 
 	dialog_animation_ = std::make_unique<Dialog_Animation>();
 
+
+
 	SetBackgroundColor(RGB(45, 45, 48));
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
@@ -112,7 +114,19 @@ void CMFCAnimationControllerDlg::OnStnClickedStaticAnimation2()
 	}
 	else
 	{
+		CRect rcAnimation, rcParent, rcButton;
+		GetClientRect(rcParent);
+		ClientToScreen(rcParent);
+		//dialog_animation_->GetWindowRect(rcAnimation);
+
+		animation2_.GetWindowRect(rcButton);
+
+		rcAnimation = CRect(rcButton.right, rcParent.top, rcParent.right, rcParent.bottom);
+		//rcAnimation.MoveToXY(rcButton.right, rcParent.top);
+
+		dialog_animation_->MoveWindow(rcAnimation);
 		dialog_animation_->ShowWindow(SW_SHOW);
+
 	}
 	// TODO: Add your control notification handler code here
 

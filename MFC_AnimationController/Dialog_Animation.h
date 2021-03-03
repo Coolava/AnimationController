@@ -1,6 +1,7 @@
 #pragma once
 #include <afxdialogex.h>
 #include "OleInitializer.h"
+#include "Button_Animation.h"
 class Dialog_Animation :
     public CDialogEx, public OleInitializer
 {
@@ -25,11 +26,15 @@ protected:
 	enum class State : int { Stop, Move };
 	State state_ = State::Stop;
 
+	Button_Animation buttonLeft;
+	Button_Animation buttonRight;
+
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedButtonLeft();
 	afx_msg void OnBnClickedButtonRight();
 	afx_msg void OnPaint();
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	virtual BOOL OnInitDialog();
 };
 

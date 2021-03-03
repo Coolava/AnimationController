@@ -17,6 +17,8 @@ public:
     void setHighlightColor(COLORREF color);
     void setClickColor(COLORREF color);
     void setAnimationSeconds(double seconds);
+
+    void setTextAlign(Gdiplus::StringAlignment align);
 private:
 
     ULONG_PTR gdiplusToken_;
@@ -33,6 +35,8 @@ private:
     COLORREF textColor_ = RGB(255, 255, 255);
     COLORREF highlightColor_ = RGB(62, 62, 64);
     COLORREF clickColor_ = RGB(0, 122, 204);
+
+    Gdiplus::StringFormat stringFormat_;
 
     double seconds_ = 0.2;
 
