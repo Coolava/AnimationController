@@ -21,6 +21,10 @@ Dialog_Animation::~Dialog_Animation()
 void Dialog_Animation::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+
+	DDX_Control(pDX, IDC_BUTTON_LEFT, buttonLeft);
+	DDX_Control(pDX, IDC_BUTTON_RIGHT, buttonRight);
+	
 }
 
 
@@ -46,10 +50,10 @@ void Dialog_Animation::OnBnClickedButtonLeft()
 	target_.right -= 100;
 
 	animation_rect_.AddTransition(
-		new CAccelerateDecelerateTransition(2.0, target_.left),
-		new CAccelerateDecelerateTransition(2.0, target_.top),
-		new CAccelerateDecelerateTransition(2.0, target_.right),
-		new CAccelerateDecelerateTransition(2.0, target_.bottom)
+		new CAccelerateDecelerateTransition(1.0, target_.left, 0.5, 0.3),
+		new CAccelerateDecelerateTransition(1.0, target_.top, 0.5, 0.3),
+		new CAccelerateDecelerateTransition(1.0, target_.right, 0.5, 0.3),
+		new CAccelerateDecelerateTransition(1.0, target_.bottom, 0.5, 0.3)
 
 	);
 	animation_rect_.SetID(0, 1);
@@ -74,10 +78,10 @@ void Dialog_Animation::OnBnClickedButtonRight()
 	target_.right += 100;
 
 	animation_rect_.AddTransition(
-		new CAccelerateDecelerateTransition(2.0, target_.left),
-		new CAccelerateDecelerateTransition(2.0, target_.top),
-		new CAccelerateDecelerateTransition(2.0, target_.right),
-		new CAccelerateDecelerateTransition(2.0, target_.bottom)
+		new CAccelerateDecelerateTransition(1.0, target_.left, 0.5,0.3),
+		new CAccelerateDecelerateTransition(1.0, target_.top, 0.5, 0.3),
+		new CAccelerateDecelerateTransition(1.0, target_.right, 0.5, 0.3),
+		new CAccelerateDecelerateTransition(1.0, target_.bottom, 0.5, 0.3)
 
 	);
 	animation_rect_.SetID(0, 1);
@@ -122,4 +126,18 @@ BOOL Dialog_Animation::OnEraseBkgnd(CDC* pDC)
 	{
 		return __super::OnEraseBkgnd(pDC);
 	}
+}
+
+
+BOOL Dialog_Animation::OnInitDialog()
+{
+	__super::OnInitDialog();
+
+
+	SetBackgroundColor(RGB(65, 65, 68));
+
+	buttonLeft.setTextAlign(Gdiplus::StringAlignment::StringAlignmentCenter);
+	buttonRight.setTextAlign(Gdiplus::StringAlignment::StringAlignmentCenter);
+	return TRUE;  // return TRUE unless you set the focus to a control
+				  // EXCEPTION: OCX Property Pages should return FALSE
 }

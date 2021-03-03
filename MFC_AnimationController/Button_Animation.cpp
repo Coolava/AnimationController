@@ -32,6 +32,11 @@ void Button_Animation::setAnimationSeconds(double seconds)
 {
 	seconds_ = seconds;
 }
+void Button_Animation::setTextAlign(Gdiplus::StringAlignment align)
+{
+	stringFormat_.SetAlignment(align);
+	stringFormat_.SetLineAlignment(Gdiplus::StringAlignment::StringAlignmentCenter);
+}
 BEGIN_MESSAGE_MAP(Button_Animation, CWnd)
 	ON_WM_MOUSELEAVE()
 	ON_WM_PAINT()
@@ -88,6 +93,7 @@ void Button_Animation::OnPaint()
 	CFont* font = GetFont();
 	LOGFONT lf;
 	::ZeroMemory(&lf, sizeof(lf));
+	
 	font->GetLogFont(&lf);
 
 	Gdiplus::Font gpFont(dc, &lf);
@@ -96,10 +102,11 @@ void Button_Animation::OnPaint()
 	Gdiplus::SolidBrush brush_rect(Gdiplus::Color(GetRValue(clr), GetGValue(clr), GetBValue(clr)));
 
 	memG.FillRectangle(&brush_rect, Gdiplus::Rect(rc.left, rc.top, rc.Width(), rc.Height()));
-
+	
 	CString text;
 	GetWindowText(text);
-	memG.DrawString(text, text.GetLength(), &gpFont, Gdiplus::PointF(rc.left, rc.top), &brush_text);
+	
+	memG.DrawString(text, text.GetLength(), &gpFont, Gdiplus::RectF(rc.left, rc.top, rc.Width(), rc.Height()), &stringFormat_,  &brush_text);
 
 	graphics.DrawImage(&memBmp, 0, 0);
 }
