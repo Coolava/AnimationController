@@ -32,8 +32,8 @@ BEGIN_MESSAGE_MAP(Dialog_Animation, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_LEFT, &Dialog_Animation::OnBnClickedButtonLeft)
 	ON_BN_CLICKED(IDC_BUTTON_RIGHT, &Dialog_Animation::OnBnClickedButtonRight)
 	ON_WM_PAINT()
-	ON_WM_ERASEBKGND()
 	ON_WM_SHOWWINDOW()
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 
@@ -138,6 +138,7 @@ BOOL Dialog_Animation::OnInitDialog()
 	SetBackgroundColor(RGB(65, 65, 68));
 
 	buttonLeft.setTextAlign(Gdiplus::StringAlignment::StringAlignmentCenter);
+	buttonLeft.BringWindowToTop();
 	buttonRight.setTextAlign(Gdiplus::StringAlignment::StringAlignmentCenter);
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
@@ -158,56 +159,24 @@ void Dialog_Animation::OnShowWindow(BOOL bShow, UINT nStatus)
 		rc.right = rc.left + 1;
 
 		MoveWindow(rc);
-		threadRect.get_id();
 
-		if (threadRect.joinable())
-		{
-			threadRect.join();
-		}
+		state_ = State::Move;
 
-		/*Using CAnimationController in OnShowWindow can't draw background.*/
-		threadRect = std::thread(&Dialog_Animation::rectProcessor, this);
+		animation_rect_ = rc;
 
+		animation_rect_.AddTransition(
+			new CAccelerateDecelerateTransition(1.0, target_.left, 0.5, 0.3),
+			new CAccelerateDecelerateTransition(1.0, target_.top, 0.5, 0.3),
+			new CAccelerateDecelerateTransition(1.0, target_.right, 0.5, 0.3),
+			new CAccelerateDecelerateTransition(1.0, target_.bottom, 0.5, 0.3)
+
+		);
+		animation_rect_.SetID(0, 1);
+
+		animation_controller_.AddAnimationObject(&animation_rect_);
+
+		animation_controller_.AnimateGroup(1);
 	}
 
 }
 
-void Dialog_Animation::rectProcessor()
-{
-	const double targetSecond = 0.2;
-	const double fps = 60;
-	const double frameCount = targetSecond * fps;
-	const double secondsPerFrame = 1 / fps;
-
-	CRect targetRect = target_, startRect;
-
-	GetWindowRect(startRect);
-
-	RectDouble rectPerFrame{
-		((double)targetRect.left - startRect.left) / frameCount,
-		((double)targetRect.right - startRect.right) / frameCount,
-		((double)targetRect.top - startRect.top) / frameCount,
-		((double)targetRect.bottom - startRect.bottom) / frameCount
-	};
-
-	double currentSecond = 0;
-	auto targetTime = std::chrono::system_clock::now();
-	for (double i = 0; i < frameCount; i++)
-	{
-		startRect.left += rectPerFrame.left;
-		startRect.right += rectPerFrame.right;
-		startRect.top += rectPerFrame.top;
-		startRect.bottom += rectPerFrame.bottom;
-
-		MoveWindow(startRect);
-
-		targetTime += std::chrono::milliseconds((int)(secondsPerFrame *1000));
-		std::this_thread::sleep_until(targetTime);
-	}
-
-	/*double to long will be loss some rect.*/
-	MoveWindow(targetRect);
-
-
-
-}
