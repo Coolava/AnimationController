@@ -105,13 +105,9 @@ void Dialog_Animation::OnPaint()
 		animation_rect_.GetValue(rc);
 		if (rc == target_)
 		{
-			MoveWindow(rc);
 			state_ = State::Stop;
 		}
-		else
-		{
-			MoveWindow(rc);
-		}
+		MoveWindow(rc);
 	}
 }
 
