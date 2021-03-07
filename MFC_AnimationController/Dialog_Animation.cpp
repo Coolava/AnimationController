@@ -105,27 +105,13 @@ void Dialog_Animation::OnPaint()
 		animation_rect_.GetValue(rc);
 		if (rc == target_)
 		{
+			MoveWindow(rc);
 			state_ = State::Stop;
 		}
 		else
 		{
 			MoveWindow(rc);
 		}
-	}
-}
-
-
-BOOL Dialog_Animation::OnEraseBkgnd(CDC* pDC)
-{
-	// TODO: Add your message handler code here and/or call default
-
-	if (state_ == State::Move)
-	{
-		return FALSE;
-	}
-	else
-	{
-		return __super::OnEraseBkgnd(pDC);
 	}
 }
 
@@ -138,7 +124,6 @@ BOOL Dialog_Animation::OnInitDialog()
 	SetBackgroundColor(RGB(65, 65, 68));
 
 	buttonLeft.setTextAlign(Gdiplus::StringAlignment::StringAlignmentCenter);
-	buttonLeft.BringWindowToTop();
 	buttonRight.setTextAlign(Gdiplus::StringAlignment::StringAlignmentCenter);
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
@@ -165,10 +150,10 @@ void Dialog_Animation::OnShowWindow(BOOL bShow, UINT nStatus)
 		animation_rect_ = rc;
 
 		animation_rect_.AddTransition(
-			new CAccelerateDecelerateTransition(1.0, target_.left, 0.5, 0.3),
-			new CAccelerateDecelerateTransition(1.0, target_.top, 0.5, 0.3),
-			new CAccelerateDecelerateTransition(1.0, target_.right, 0.5, 0.3),
-			new CAccelerateDecelerateTransition(1.0, target_.bottom, 0.5, 0.3)
+			new CAccelerateDecelerateTransition(0.5, target_.left, 0.5, 0.3),
+			new CAccelerateDecelerateTransition(0.5, target_.top, 0.5, 0.3),
+			new CAccelerateDecelerateTransition(0.5, target_.right, 0.5, 0.3),
+			new CAccelerateDecelerateTransition(0.5, target_.bottom, 0.5, 0.3)
 
 		);
 		animation_rect_.SetID(0, 1);
