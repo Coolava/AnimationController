@@ -2,6 +2,10 @@
 #include <afxdialogex.h>
 #include "OleInitializer.h"
 #include "Button_Animation.h"
+
+#include <thread>
+#include <memory>
+#include <chrono>
 class Dialog_Animation :
     public CDialogEx, public OleInitializer
 {
@@ -36,5 +40,17 @@ public:
 	afx_msg void OnPaint();
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	virtual BOOL OnInitDialog();
+	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
+
+private:
+	struct RectDouble
+	{
+		double left;
+		double right;
+		double top; 
+		double bottom;
+	};
+	std::thread threadRect;
+	void rectProcessor();
 };
 
