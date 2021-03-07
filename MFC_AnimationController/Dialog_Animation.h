@@ -2,10 +2,6 @@
 #include <afxdialogex.h>
 #include "OleInitializer.h"
 #include "Button_Animation.h"
-
-#include <thread>
-#include <memory>
-#include <chrono>
 class Dialog_Animation :
     public CDialogEx, public OleInitializer
 {
