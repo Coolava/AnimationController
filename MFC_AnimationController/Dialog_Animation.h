@@ -41,16 +41,4 @@ public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	virtual BOOL OnInitDialog();
 	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
-
-private:
-	struct RectDouble
-	{
-		double left;
-		double right;
-		double top; 
-		double bottom;
-	};
-	std::thread threadRect;
-	void rectProcessor();
 };
-
