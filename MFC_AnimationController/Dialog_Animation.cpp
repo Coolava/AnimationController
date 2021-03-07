@@ -141,13 +141,17 @@ void Dialog_Animation::OnShowWindow(BOOL bShow, UINT nStatus)
 
 		target_ = rc;
 
-		rc.right = rc.left + 1;
 
-		MoveWindow(rc);
+		CRect rcStart = rc;
+		/* If cx is zero, it couldn't be work*/
+		//rcStart.right = rcStart.left + 0;
+		rcStart.right = rcStart.left + 1;
+
+		MoveWindow(rcStart);
 
 		state_ = State::Move;
 
-		animation_rect_ = rc;
+		animation_rect_ = rcStart;
 
 		animation_rect_.AddTransition(
 			new CAccelerateDecelerateTransition(0.5, target_.left, 0.5, 0.3),
