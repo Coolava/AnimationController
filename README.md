@@ -2,6 +2,10 @@
 
 ![mfc_animationController](https://user-images.githubusercontent.com/45839935/108186894-417e0680-7151-11eb-9cc0-bb780eb95bf3.gif)
 
+## Goal   
+* Quality comparable to commercial libraries.
+* Ease of development.
+
 ## Contents
 * Button
 * Circle Progress
