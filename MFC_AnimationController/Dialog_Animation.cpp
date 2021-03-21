@@ -32,7 +32,8 @@ BEGIN_MESSAGE_MAP(Dialog_Animation, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON_LEFT, &Dialog_Animation::OnBnClickedButtonLeft)
 	ON_BN_CLICKED(IDC_BUTTON_RIGHT, &Dialog_Animation::OnBnClickedButtonRight)
 	ON_WM_PAINT()
-	ON_WM_ERASEBKGND()
+	ON_WM_SHOWWINDOW()
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 
@@ -106,25 +107,7 @@ void Dialog_Animation::OnPaint()
 		{
 			state_ = State::Stop;
 		}
-		else
-		{
-			MoveWindow(rc,FALSE);
-		}
-	}
-}
-
-
-BOOL Dialog_Animation::OnEraseBkgnd(CDC* pDC)
-{
-	// TODO: Add your message handler code here and/or call default
-
-	if (state_ == State::Move)
-	{
-		return FALSE;
-	}
-	else
-	{
-		return __super::OnEraseBkgnd(pDC);
+		MoveWindow(rc);
 	}
 }
 
@@ -141,3 +124,44 @@ BOOL Dialog_Animation::OnInitDialog()
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
 }
+
+
+void Dialog_Animation::OnShowWindow(BOOL bShow, UINT nStatus)
+{
+	__super::OnShowWindow(bShow, nStatus);
+
+	if( bShow == TRUE)
+	{
+		CRect rc;
+		GetWindowRect(rc);
+
+		target_ = rc;
+
+
+		CRect rcStart = rc;
+		/* If cx is zero, it couldn't be work*/
+		//rcStart.right = rcStart.left + 0;
+		rcStart.right = rcStart.left + 1;
+
+		MoveWindow(rcStart);
+
+		state_ = State::Move;
+
+		animation_rect_ = rcStart;
+
+		animation_rect_.AddTransition(
+			new CAccelerateDecelerateTransition(0.5, target_.left, 0.5, 0.3),
+			new CAccelerateDecelerateTransition(0.5, target_.top, 0.5, 0.3),
+			new CAccelerateDecelerateTransition(0.5, target_.right, 0.5, 0.3),
+			new CAccelerateDecelerateTransition(0.5, target_.bottom, 0.5, 0.3)
+
+		);
+		animation_rect_.SetID(0, 1);
+
+		animation_controller_.AddAnimationObject(&animation_rect_);
+
+		animation_controller_.AnimateGroup(1);
+	}
+
+}
+
