@@ -3,7 +3,7 @@
 #include "OleInitializer.h"
 #include <gdiplus.h>
 #pragma comment (lib,"Gdiplus.lib")
-
+using StringAlignment = Gdiplus::StringAlignment;
 class Circle_Progress :
     public OleInitializer, public CWnd
 {
@@ -17,9 +17,14 @@ public:
     void setAnimationSeconds(double seconds);
     void setBallCount(int count);
     void setBallSize(double size);
+    void setBallDistanceDegree(double degree);
 
     void start();
     void stop();
+
+    void setText(CString text);
+    void setAlignment(StringAlignment alignment);
+    void setLineAlignment(StringAlignment alignment);
 private:
 
     ULONG_PTR gdiplusToken_;
@@ -32,10 +37,15 @@ private:
     COLORREF ballColor_ = RGB(255, 255, 255);
     double seconds_ = 2.0;
 
-    int ballCount_ = 3;
+    int ballCount_ = 10;
     double ballSize_ = 8;
+    double distance_ = 30.0;
 
     State state_ = State::Stop;
+
+    Gdiplus::StringFormat format_;
+    Gdiplus::Font font_;
+    CString text_;
 public:
     DECLARE_MESSAGE_MAP()
     afx_msg void OnPaint();

@@ -37,11 +37,14 @@ protected:
 	Button_Animation animation_;
 	Button_Animation animation2_;
 	Button_Animation animation3_;
-	Circle_Progress animation4_;
+
+	int progress_;
+	Circle_Progress circleProgress_;
 
 	std::unique_ptr<Dialog_Animation> dialog_animation_;
 
 public:
 	afx_msg void OnStnClickedStaticAnimation();
 	afx_msg void OnStnClickedStaticAnimation2();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };
