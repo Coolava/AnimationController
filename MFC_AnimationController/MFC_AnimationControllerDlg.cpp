@@ -29,7 +29,7 @@ void CMFCAnimationControllerDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_STATIC_ANIMATION, animation_);
 	DDX_Control(pDX, IDC_STATIC_ANIMATION2, animation2_);
 	DDX_Control(pDX, IDC_STATIC_ANIMATION3, animation3_);
-	DDX_Control(pDX, IDC_STATIC_ANIMATION4, animation4_);
+	DDX_Control(pDX, IDC_STATIC_ANIMATION4, circleProgress_);
 	
 }
 
@@ -38,6 +38,7 @@ BEGIN_MESSAGE_MAP(CMFCAnimationControllerDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_STN_CLICKED(IDC_STATIC_ANIMATION, &CMFCAnimationControllerDlg::OnStnClickedStaticAnimation)
 	ON_STN_CLICKED(IDC_STATIC_ANIMATION2, &CMFCAnimationControllerDlg::OnStnClickedStaticAnimation2)
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 
@@ -55,7 +56,9 @@ BOOL CMFCAnimationControllerDlg::OnInitDialog()
 
 	dialog_animation_ = std::make_unique<Dialog_Animation>();
 
-
+	circleProgress_.setBallCount(5);
+	circleProgress_.setBallDistanceDegree(30.0);
+	circleProgress_.setAnimationSeconds(3.0);
 
 	SetBackgroundColor(RGB(45, 45, 48));
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
@@ -99,10 +102,17 @@ HCURSOR CMFCAnimationControllerDlg::OnQueryDragIcon()
 
 void CMFCAnimationControllerDlg::OnStnClickedStaticAnimation()
 {
-	if (animation4_.getState() == Circle_Progress::State::InProgress)
-		animation4_.stop();
+	if (circleProgress_.getState() == Circle_Progress::State::InProgress)
+	{
+		KillTimer(10);
+		circleProgress_.stop();
+	}
 	else
-		animation4_.start();
+	{
+		circleProgress_.start();
+		SetTimer(10, 1000, NULL);
+	}
+
 }
 
 
@@ -130,4 +140,23 @@ void CMFCAnimationControllerDlg::OnStnClickedStaticAnimation2()
 	}
 	// TODO: Add your control notification handler code here
 
+}
+
+
+void CMFCAnimationControllerDlg::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: Add your message handler code here and/or call default
+
+	switch (nIDEvent)
+	{
+	case 10:
+	{
+
+		CString str;
+		str.Format(_T("%d"), progress_++);
+		/*CircleProgress*/
+		circleProgress_.setText(str);
+	}
+	}
+	CDialogEx::OnTimer(nIDEvent);
 }
