@@ -95,6 +95,7 @@ void Circle_Progress::OnPaint()
 	CRect rc;
 	GetClientRect(rc);
 
+
 	Gdiplus::Graphics graphics(dc);
 	/*Initialize buffer bitmap */
 	Gdiplus::Bitmap memBmp(rc.Width(), rc.Height());
