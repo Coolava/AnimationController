@@ -13,5 +13,9 @@
 ## Next
 * Dialog
 
+## Problem
+* CAnimationController make too many WM_PAINT messages ....    
+  Double buffering cannot be used due to structural problems.   
+     
 If you need more information about Animation in MFC Application, See [CAnimationController](https://docs.microsoft.com/ko-kr/cpp/mfc/reference/canimationcontroller-class?view=msvc-160) on MSDN.
 
