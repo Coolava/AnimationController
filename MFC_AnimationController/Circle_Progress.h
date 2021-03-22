@@ -54,4 +54,5 @@ public:
     State getState() {
         return state_;
     }
+    virtual BOOL PreTranslateMessage(MSG* pMsg);
 };

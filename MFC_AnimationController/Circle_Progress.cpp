@@ -153,3 +153,15 @@ void Circle_Progress::OnPaint()
 
 	graphics.DrawImage(&memBmp, 0, 0);
 }
+
+
+BOOL Circle_Progress::PreTranslateMessage(MSG* pMsg)
+{
+	// TODO: Add your specialized code here and/or call the base class
+	if (pMsg->message == WM_PAINT)
+	{
+		static int cnt = 0;
+		text_.Format(_T("%d"), cnt++);
+	}
+	return __super::PreTranslateMessage(pMsg);
+}
