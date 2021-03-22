@@ -92,9 +92,6 @@ void Circle_Progress::OnPaint()
 	CPaintDC dc(this); // device context for painting
 					   // TODO: Add your message handler code here
 					   // Do not call CWnd::OnPaint() for painting messages
-
-
-	
 	CRect rc;
 	GetClientRect(rc);
 
@@ -102,6 +99,7 @@ void Circle_Progress::OnPaint()
 	/*Initialize buffer bitmap */
 	Gdiplus::Bitmap memBmp(rc.Width(), rc.Height());
 	Gdiplus::Graphics memG(&memBmp);
+	
 	memG.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
 
 	/*Background*/
