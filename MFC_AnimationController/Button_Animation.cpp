@@ -34,8 +34,13 @@ void Button_Animation::setAnimationSeconds(double seconds)
 }
 void Button_Animation::setTextAlign(Gdiplus::StringAlignment align)
 {
-	stringFormat_.SetAlignment(align);
-	stringFormat_.SetLineAlignment(Gdiplus::StringAlignment::StringAlignmentCenter);
+	alignHorizon_ = align;
+	alignVertical_ = align;
+	//using namespace Gdiplus;
+	////auto status = stringFormat_.SetAlignment(align);
+	//auto status = stringFormat_.SetAlignment(StringAlignmentCenter);
+	//status = stringFormat_.GetLastStatus();
+	//stringFormat_.SetLineAlignment(Gdiplus::StringAlignment::StringAlignmentCenter);
 }
 BEGIN_MESSAGE_MAP(Button_Animation, CWnd)
 	ON_WM_MOUSELEAVE()
@@ -43,6 +48,7 @@ BEGIN_MESSAGE_MAP(Button_Animation, CWnd)
 	ON_WM_MOUSEMOVE()
 	ON_WM_MOUSEHOVER()
 	ON_WM_LBUTTONDOWN()
+	ON_WM_KILLFOCUS()
 END_MESSAGE_MAP()
 
 
@@ -93,7 +99,7 @@ void Button_Animation::OnPaint()
 	CFont* font = GetFont();
 	LOGFONT lf;
 	::ZeroMemory(&lf, sizeof(lf));
-	
+
 	font->GetLogFont(&lf);
 
 	Gdiplus::Font gpFont(dc, &lf);
@@ -102,11 +108,14 @@ void Button_Animation::OnPaint()
 	Gdiplus::SolidBrush brush_rect(Gdiplus::Color(GetRValue(clr), GetGValue(clr), GetBValue(clr)));
 
 	memG.FillRectangle(&brush_rect, Gdiplus::Rect(rc.left, rc.top, rc.Width(), rc.Height()));
-	
+
 	CString text;
 	GetWindowText(text);
-	
-	memG.DrawString(text, text.GetLength(), &gpFont, Gdiplus::RectF(rc.left, rc.top, rc.Width(), rc.Height()), &stringFormat_,  &brush_text);
+
+	Gdiplus::StringFormat format;
+	format.SetAlignment(alignHorizon_);
+	format.SetLineAlignment(alignVertical_);
+	memG.DrawString(text, text.GetLength(), &gpFont, Gdiplus::RectF(rc.left, rc.top, rc.Width(), rc.Height()), &format, &brush_text);
 
 	graphics.DrawImage(&memBmp, 0, 0);
 }
@@ -147,3 +156,4 @@ void Button_Animation::ChangeState(State state, COLORREF default_color, COLORREF
 
 	animation_controller_.AnimateGroup(1);
 }
+

@@ -36,7 +36,8 @@ private:
     COLORREF highlightColor_ = RGB(62, 62, 64);
     COLORREF clickColor_ = RGB(0, 122, 204);
 
-    Gdiplus::StringFormat stringFormat_;
+    Gdiplus::StringAlignment alignHorizon_;
+    Gdiplus::StringAlignment alignVertical_;
 
     double seconds_ = 0.2;
 
