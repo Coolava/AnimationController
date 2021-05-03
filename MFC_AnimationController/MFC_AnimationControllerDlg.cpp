@@ -26,10 +26,15 @@ CMFCAnimationControllerDlg::CMFCAnimationControllerDlg(CWnd* pParent /*=nullptr*
 void CMFCAnimationControllerDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_STATIC_ANIMATION, animation_);
+	
+		DDX_Control(pDX, IDC_BUTTON1, animation_);
+	//DDX_Control(pDX, IDC_STATIC_ANIMATION, animation_);
 	DDX_Control(pDX, IDC_STATIC_ANIMATION2, animation2_);
 	DDX_Control(pDX, IDC_STATIC_ANIMATION3, animation3_);
 	DDX_Control(pDX, IDC_STATIC_ANIMATION4, circleProgress_);
+	DDX_Control(pDX, IDC_EDIT2, edit_);
+	DDX_Control(pDX, IDC_EDIT1, edit1_);
+	
 	
 }
 
@@ -39,6 +44,7 @@ BEGIN_MESSAGE_MAP(CMFCAnimationControllerDlg, CDialogEx)
 	ON_STN_CLICKED(IDC_STATIC_ANIMATION, &CMFCAnimationControllerDlg::OnStnClickedStaticAnimation)
 	ON_STN_CLICKED(IDC_STATIC_ANIMATION2, &CMFCAnimationControllerDlg::OnStnClickedStaticAnimation2)
 	ON_WM_TIMER()
+	ON_STN_CLICKED(IDC_STATIC_ANIMATION3, &CMFCAnimationControllerDlg::OnStnClickedStaticAnimation3)
 END_MESSAGE_MAP()
 
 
@@ -61,6 +67,17 @@ BOOL CMFCAnimationControllerDlg::OnInitDialog()
 	circleProgress_.setAnimationSeconds(3.0);
 
 	SetBackgroundColor(RGB(45, 45, 48));
+
+
+	CRect rc;
+	edit1_.GetRect(rc);
+	rc.top += 5;
+	edit1_.SetRect(rc);
+
+	edit_.GetRect(rc);
+
+	animation_.setTextAlign(Gdiplus::StringAlignment::StringAlignmentCenter);
+	
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
 
@@ -159,4 +176,16 @@ void CMFCAnimationControllerDlg::OnTimer(UINT_PTR nIDEvent)
 	}
 	}
 	CDialogEx::OnTimer(nIDEvent);
+}
+
+
+void CMFCAnimationControllerDlg::OnStnClickedStaticAnimation3()
+{
+	// TODO: Add your control notification handler code here
+
+
+	CRect rc;
+	edit_.GetRect(rc);
+	rc.top += 5;
+	edit_.SetRect(rc);
 }

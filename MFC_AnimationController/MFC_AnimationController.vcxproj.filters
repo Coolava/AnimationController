@@ -51,6 +51,9 @@
     <ClInclude Include="Dialog_Animation.h">
       <Filter>Animation Control</Filter>
     </ClInclude>
+    <ClInclude Include="RoundedEdit.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MFC_AnimationController.cpp">
@@ -73,6 +76,9 @@
     </ClCompile>
     <ClCompile Include="Dialog_Animation.cpp">
       <Filter>Animation Control</Filter>
+    </ClCompile>
+    <ClCompile Include="RoundedEdit.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

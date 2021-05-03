@@ -6,6 +6,7 @@
 #include "Button_Animation.h"
 #include "Circle_Progress.h"
 #include "Dialog_Animation.h"
+#include "RoundedEdit.h"
 #include <memory>
 
 // CMFCAnimationControllerDlg 대화 상자
@@ -43,8 +44,11 @@ protected:
 
 	std::unique_ptr<Dialog_Animation> dialog_animation_;
 
+	RoundedEdit edit_;
+	CEdit edit1_;
 public:
 	afx_msg void OnStnClickedStaticAnimation();
 	afx_msg void OnStnClickedStaticAnimation2();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnStnClickedStaticAnimation3();
 };

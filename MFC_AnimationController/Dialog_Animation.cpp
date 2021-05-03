@@ -119,7 +119,7 @@ BOOL Dialog_Animation::OnInitDialog()
 
 	SetBackgroundColor(RGB(65, 65, 68));
 
-	buttonLeft.setTextAlign(Gdiplus::StringAlignment::StringAlignmentCenter);
+	//buttonLeft.setTextAlign(Gdiplus::StringAlignment::StringAlignmentCenter);
 	buttonRight.setTextAlign(Gdiplus::StringAlignment::StringAlignmentCenter);
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
