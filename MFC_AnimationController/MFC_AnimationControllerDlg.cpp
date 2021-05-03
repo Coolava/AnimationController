@@ -30,6 +30,8 @@ void CMFCAnimationControllerDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_STATIC_ANIMATION2, animation2_);
 	DDX_Control(pDX, IDC_STATIC_ANIMATION3, animation3_);
 	DDX_Control(pDX, IDC_STATIC_ANIMATION4, circleProgress_);
+	DDX_Control(pDX, IDC_STATIC_LED, led_);
+	
 	
 }
 
@@ -39,6 +41,7 @@ BEGIN_MESSAGE_MAP(CMFCAnimationControllerDlg, CDialogEx)
 	ON_STN_CLICKED(IDC_STATIC_ANIMATION, &CMFCAnimationControllerDlg::OnStnClickedStaticAnimation)
 	ON_STN_CLICKED(IDC_STATIC_ANIMATION2, &CMFCAnimationControllerDlg::OnStnClickedStaticAnimation2)
 	ON_WM_TIMER()
+	ON_STN_CLICKED(IDC_STATIC_ANIMATION3, &CMFCAnimationControllerDlg::OnStnClickedStaticAnimation3)
 END_MESSAGE_MAP()
 
 
@@ -59,6 +62,7 @@ BOOL CMFCAnimationControllerDlg::OnInitDialog()
 	circleProgress_.setBallCount(5);
 	circleProgress_.setBallDistanceDegree(30.0);
 	circleProgress_.setAnimationSeconds(3.0);
+
 
 	SetBackgroundColor(RGB(45, 45, 48));
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
@@ -159,4 +163,13 @@ void CMFCAnimationControllerDlg::OnTimer(UINT_PTR nIDEvent)
 	}
 	}
 	CDialogEx::OnTimer(nIDEvent);
+}
+
+
+void CMFCAnimationControllerDlg::OnStnClickedStaticAnimation3()
+{
+	if (led_.get() == true)
+		led_.off();
+	else
+		led_.on();
 }

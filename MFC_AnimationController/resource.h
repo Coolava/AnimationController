@@ -12,6 +12,8 @@
 #define IDC_STATIC_ANIMATION3           1003
 #define IDC_BUTTON_LEFT                 1003
 #define IDC_STATIC_ANIMATION4           1004
+#define IDC_STATIC_ANIMATION5           1005
+#define IDC_STATIC_LED                  1005
 
 // Next default values for new objects
 // 

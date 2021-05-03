@@ -186,6 +186,7 @@
     <ClInclude Include="Button_Animation.h" />
     <ClInclude Include="Dialog_Animation.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="LedControl.h" />
     <ClInclude Include="MFC_AnimationController.h" />
     <ClInclude Include="MFC_AnimationControllerDlg.h" />
     <ClInclude Include="OleInitializer.h" />
@@ -198,8 +199,12 @@
   <ItemGroup>
     <ClCompile Include="Button_Animation.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Dialog_Animation.cpp" />
+    <ClCompile Include="LedControl.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="MFC_AnimationController.cpp" />
     <ClCompile Include="MFC_AnimationControllerDlg.cpp" />
     <ClCompile Include="OleInitializer.cpp" />
