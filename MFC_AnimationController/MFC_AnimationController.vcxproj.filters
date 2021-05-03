@@ -51,6 +51,9 @@
     <ClInclude Include="Dialog_Animation.h">
       <Filter>Animation Control</Filter>
     </ClInclude>
+    <ClInclude Include="LedControl.h">
+      <Filter>Animation Control</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MFC_AnimationController.cpp">
@@ -72,6 +75,9 @@
       <Filter>Animation Control</Filter>
     </ClCompile>
     <ClCompile Include="Dialog_Animation.cpp">
+      <Filter>Animation Control</Filter>
+    </ClCompile>
+    <ClCompile Include="LedControl.cpp">
       <Filter>Animation Control</Filter>
     </ClCompile>
   </ItemGroup>
