@@ -64,6 +64,9 @@ BOOL CMFCAnimationControllerDlg::OnInitDialog()
 	circleProgress_.setAnimationSeconds(3.0);
 
 
+	animation_.loadImages({ _T("res\\Icon Power On.png") });
+	animation_.showImage(0);
+
 	SetBackgroundColor(RGB(45, 45, 48));
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }

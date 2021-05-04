@@ -3,11 +3,19 @@
 #include <gdiplus.h>
 #pragma comment (lib,"Gdiplus.lib")
 #include "OleInitializer.h"
-
+#include <memory>
+#include <vector>
+#include <string>
 
 class Button_Animation :
     public OleInitializer, public CWnd
 {
+#ifdef _UNICODE
+    using string = std::wstring;
+#else
+    using string = std::string;
+#endif
+
 public:
     Button_Animation();
     virtual ~Button_Animation();
@@ -19,6 +27,19 @@ public:
     void setAnimationSeconds(double seconds);
 
     void setTextAlign(Gdiplus::StringAlignment align);
+
+    /**
+     * @brief You can set as many images as you want. 
+     * For show images, see showImage().
+     * @param vector of imagePath 
+    */
+    bool loadImages(std::vector<string> imagePath);
+
+    /**
+     * @brief Show loaded image.
+     * @param index of imagepath vector
+    */
+    bool showImage(size_t index);
 private:
 
     ULONG_PTR gdiplusToken_;
@@ -37,6 +58,9 @@ private:
     COLORREF clickColor_ = RGB(0, 122, 204);
 
     Gdiplus::StringFormat stringFormat_;
+    using ImageList = std::vector<std::unique_ptr<Gdiplus::Image>>;
+    ImageList imageList;
+    size_t imageIndex;
 
     double seconds_ = 0.2;
 

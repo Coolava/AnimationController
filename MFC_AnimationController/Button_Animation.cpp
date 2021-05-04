@@ -37,6 +37,38 @@ void Button_Animation::setTextAlign(Gdiplus::StringAlignment align)
 	stringFormat_.SetAlignment(align);
 	stringFormat_.SetLineAlignment(Gdiplus::StringAlignment::StringAlignmentCenter);
 }
+bool Button_Animation::loadImages(std::vector<string> imagePath)
+{
+	if (imagePath.size() == 0)
+	{
+		return false;
+	}
+
+	imageList.clear();
+
+	for (auto path : imagePath)
+	{
+		imageList.emplace_back(new Gdiplus::Image(path.c_str()));
+	}
+
+	return true;
+
+}
+
+bool Button_Animation::showImage(size_t index)
+{
+	if (index >= imageList.size())
+	{
+		return false;
+	}
+
+	imageIndex = index;
+
+	Invalidate();
+
+	return true;
+}
+
 BEGIN_MESSAGE_MAP(Button_Animation, CWnd)
 	ON_WM_MOUSELEAVE()
 	ON_WM_PAINT()
@@ -102,7 +134,53 @@ void Button_Animation::OnPaint()
 	Gdiplus::SolidBrush brush_rect(Gdiplus::Color(GetRValue(clr), GetGValue(clr), GetBValue(clr)));
 
 	memG.FillRectangle(&brush_rect, Gdiplus::Rect(rc.left, rc.top, rc.Width(), rc.Height()));
-	
+
+	if (imageList.size() > 0)
+	{
+		if(	imageIndex < imageList.size())
+		{
+			float imageWidth = (float)imageList[imageIndex]->GetWidth();
+			float imageHeight = (float)imageList[imageIndex]->GetHeight();
+
+			float controlWidth = (float)rc.Width();
+			float controlHeight = (float)rc.Height();
+
+			float horizontalScalingFactor = 0;
+			float verticalScalingFactor = 0;
+
+			if (imageWidth > controlWidth)
+			{
+				horizontalScalingFactor = controlWidth / imageWidth;
+			}
+			if (imageHeight > controlHeight)
+			{
+				verticalScalingFactor = controlHeight / imageHeight;
+			}
+
+			float scalingFactor = 0;
+			if (horizontalScalingFactor > verticalScalingFactor)
+			{
+				scalingFactor = horizontalScalingFactor;
+			}
+			else
+			{
+				scalingFactor = verticalScalingFactor;
+			}
+
+			scalingFactor = scalingFactor * 0.9;
+
+			if (scalingFactor != 0)
+			{
+				Gdiplus::Image* img = new Gdiplus::Bitmap((int)controlWidth, (int)controlHeight);
+				Gdiplus::Graphics g(img);
+				g.ScaleTransform(scalingFactor, scalingFactor);
+				g.DrawImage(imageList[imageIndex].get(), 0, 0);
+
+				memG.DrawImage(img, 0, 0);
+			}
+		}
+
+	}
 	CString text;
 	GetWindowText(text);
 	
