@@ -184,6 +184,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Button_Animation.h" />
+    <ClInclude Include="CheckBox.h" />
     <ClInclude Include="Dialog_Animation.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="LedControl.h" />
@@ -199,6 +200,9 @@
   <ItemGroup>
     <ClCompile Include="Button_Animation.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="CheckBox.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Dialog_Animation.cpp" />

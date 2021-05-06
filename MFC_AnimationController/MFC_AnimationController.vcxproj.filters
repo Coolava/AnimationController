@@ -54,6 +54,9 @@
     <ClInclude Include="LedControl.h">
       <Filter>Animation Control</Filter>
     </ClInclude>
+    <ClInclude Include="CheckBox.h">
+      <Filter>Animation Control</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MFC_AnimationController.cpp">
@@ -78,6 +81,9 @@
       <Filter>Animation Control</Filter>
     </ClCompile>
     <ClCompile Include="LedControl.cpp">
+      <Filter>Animation Control</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckBox.cpp">
       <Filter>Animation Control</Filter>
     </ClCompile>
   </ItemGroup>

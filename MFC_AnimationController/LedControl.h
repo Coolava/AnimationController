@@ -22,7 +22,7 @@ private:
     COLORREF colorOff_ = 0x2DD821;
 
 
-	std::unique_ptr < CDC> memBackground;
+    std::unique_ptr < CDC> memBackground;
 	std::unique_ptr < CBitmap> memBitmap;
 
 public:

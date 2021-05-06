@@ -150,7 +150,7 @@ void Button_Animation::OnPaint()
 
 	/*Draw background*/
 	memG.FillRectangle(&brush_rect, Gdiplus::Rect(rc.left, rc.top, rc.Width(), rc.Height()));
-
+	
 	/*Draw border*/
 	if (borderColor_ != MAXDWORD)
 	{
