@@ -5,7 +5,7 @@
 #include "OleInitializer.h"
 #include <memory>
 #include <vector>
-#include "string.h"
+#include <string>
 
 class Button_Animation :
     public OleInitializer, public CWnd
@@ -31,7 +31,7 @@ public:
      * For show images, see showImage().
      * @param vector of imagePath
     */
-    bool loadImages(std::vector<string> imagePath);
+    bool loadImages(std::vector<std::wstring> imagePath);
 
     /**
      * @brief Show loaded image.

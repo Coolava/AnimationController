@@ -52,7 +52,7 @@ void Button_Animation::setTextAlign(Gdiplus::StringAlignment align)
 	stringFormat_.SetAlignment(align);
 	stringFormat_.SetLineAlignment(Gdiplus::StringAlignment::StringAlignmentCenter);
 }
-bool Button_Animation::loadImages(std::vector<string> imagePath)
+bool Button_Animation::loadImages(std::vector<std::wstring> imagePath)
 {
 	if (imagePath.size() == 0)
 	{
