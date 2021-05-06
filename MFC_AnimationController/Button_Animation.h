@@ -5,16 +5,11 @@
 #include "OleInitializer.h"
 #include <memory>
 #include <vector>
-#include <string>
+#include "string.h"
 
 class Button_Animation :
     public OleInitializer, public CWnd
 {
-#ifdef _UNICODE
-    using string = std::wstring;
-#else
-    using string = std::string;
-#endif
 
 public:
     Button_Animation();
@@ -24,14 +19,17 @@ public:
     void setTextColor(COLORREF color);
     void setHighlightColor(COLORREF color);
     void setClickColor(COLORREF color);
+    void setBorderColor(COLORREF color);
+    void setBorderWidth(float width);
+
     void setAnimationSeconds(double seconds);
 
     void setTextAlign(Gdiplus::StringAlignment align);
 
     /**
-     * @brief You can set as many images as you want. 
+     * @brief You can set as many images as you want.
      * For show images, see showImage().
-     * @param vector of imagePath 
+     * @param vector of imagePath
     */
     bool loadImages(std::vector<string> imagePath);
 
@@ -40,6 +38,8 @@ public:
      * @param index of imagepath vector
     */
     bool showImage(size_t index);
+
+    size_t currentImage() { return imageIndex; };
 private:
 
     ULONG_PTR gdiplusToken_;
@@ -56,7 +56,9 @@ private:
     COLORREF textColor_ = RGB(255, 255, 255);
     COLORREF highlightColor_ = RGB(62, 62, 64);
     COLORREF clickColor_ = RGB(0, 122, 204);
+    COLORREF borderColor_ = MAXDWORD;
 
+    float borderWidth_ = 0;
     Gdiplus::StringFormat stringFormat_;
     using ImageList = std::vector<std::unique_ptr<Gdiplus::Image>>;
     ImageList imageList;

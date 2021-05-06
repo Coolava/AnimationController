@@ -10,8 +10,11 @@ Button_Animation::Button_Animation()
 
 Button_Animation::~Button_Animation()
 {
+	imageList.clear();
 	Gdiplus::GdiplusShutdown(gdiplusToken_);
 }
+
+
 void Button_Animation::setBackGroundColor(COLORREF color)
 {
 	backgroundColor_ = color;
@@ -28,6 +31,18 @@ void Button_Animation::setClickColor(COLORREF color)
 {
 	clickColor_ = color;
 }
+void Button_Animation::setBorderColor(COLORREF color)
+{
+	borderColor_ = color;
+}
+
+void Button_Animation::setBorderWidth(float width)
+{
+	borderWidth_ = width;
+}
+
+
+
 void Button_Animation::setAnimationSeconds(double seconds)
 {
 	seconds_ = seconds;
@@ -125,7 +140,7 @@ void Button_Animation::OnPaint()
 	CFont* font = GetFont();
 	LOGFONT lf;
 	::ZeroMemory(&lf, sizeof(lf));
-	
+
 	font->GetLogFont(&lf);
 
 	Gdiplus::Font gpFont(dc, &lf);
@@ -133,11 +148,20 @@ void Button_Animation::OnPaint()
 	Gdiplus::SolidBrush brush_text(Gdiplus::Color(GetRValue(textColor_), GetGValue(textColor_), GetBValue(textColor_)));
 	Gdiplus::SolidBrush brush_rect(Gdiplus::Color(GetRValue(clr), GetGValue(clr), GetBValue(clr)));
 
+	/*Draw background*/
 	memG.FillRectangle(&brush_rect, Gdiplus::Rect(rc.left, rc.top, rc.Width(), rc.Height()));
 
+	/*Draw border*/
+	if (borderColor_ != MAXDWORD)
+	{
+		Gdiplus::Pen borderPen(Gdiplus::Color(GetRValue(borderColor_), GetGValue(borderColor_), GetBValue(borderColor_)), borderWidth_);
+		memG.DrawRectangle(&borderPen, Gdiplus::Rect(rc.left, rc.top, rc.Width(), rc.Height()));
+	}
+
+	/*Draw Image*/
 	if (imageList.size() > 0)
 	{
-		if(	imageIndex < imageList.size())
+		if (imageIndex < imageList.size())
 		{
 			float imageWidth = (float)imageList[imageIndex]->GetWidth();
 			float imageHeight = (float)imageList[imageIndex]->GetHeight();
@@ -171,20 +195,26 @@ void Button_Animation::OnPaint()
 
 			if (scalingFactor != 0)
 			{
-				Gdiplus::Image* img = new Gdiplus::Bitmap((int)controlWidth, (int)controlHeight);
+				Gdiplus::Image* img = new Gdiplus::Bitmap((int)controlWidth * 0.9, (int)controlHeight * 0.9);
 				Gdiplus::Graphics g(img);
 				g.ScaleTransform(scalingFactor, scalingFactor);
 				g.DrawImage(imageList[imageIndex].get(), 0, 0);
 
-				memG.DrawImage(img, 0, 0);
+				float width = imageList[imageIndex]->GetWidth() * scalingFactor;
+				float height = imageList[imageIndex]->GetHeight() * scalingFactor;
+
+				float marginLeft = (controlWidth - width) / 2;
+				float marginTop = (controlHeight - height) / 2;
+
+				memG.DrawImage(img, marginLeft, marginTop);
 			}
 		}
 
 	}
 	CString text;
 	GetWindowText(text);
-	
-	memG.DrawString(text, text.GetLength(), &gpFont, Gdiplus::RectF(rc.left, rc.top, rc.Width(), rc.Height()), &stringFormat_,  &brush_text);
+
+	memG.DrawString(text, text.GetLength(), &gpFont, Gdiplus::RectF(rc.left, rc.top, rc.Width(), rc.Height()), &stringFormat_, &brush_text);
 
 	graphics.DrawImage(&memBmp, 0, 0);
 }
