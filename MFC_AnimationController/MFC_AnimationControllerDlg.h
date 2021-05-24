@@ -7,6 +7,7 @@
 #include "Circle_Progress.h"
 #include "Dialog_Animation.h"
 #include "LedControl.h"
+#include "CheckBox.h"
 #include <memory>
 
 // CMFCAnimationControllerDlg 대화 상자
@@ -45,6 +46,8 @@ protected:
 	std::unique_ptr<Dialog_Animation> dialog_animation_;
 
 	LedControl led_;
+
+	CheckBox checkBox_;
 
 public:
 	afx_msg void OnStnClickedStaticAnimation();

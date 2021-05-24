@@ -31,8 +31,7 @@ void CMFCAnimationControllerDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_STATIC_ANIMATION3, animation3_);
 	DDX_Control(pDX, IDC_STATIC_ANIMATION4, circleProgress_);
 	DDX_Control(pDX, IDC_STATIC_LED, led_);
-	
-	
+	DDX_Control(pDX, IDC_CHECK1, checkBox_);
 }
 
 BEGIN_MESSAGE_MAP(CMFCAnimationControllerDlg, CDialogEx)
