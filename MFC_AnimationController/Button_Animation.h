@@ -6,7 +6,6 @@
 #include <memory>
 #include <vector>
 #include <string>
-
 class Button_Animation :
     public OleInitializer, public CWnd
 {
@@ -40,6 +39,8 @@ public:
     bool showImage(size_t index);
 
     size_t currentImage() { return imageIndex; };
+
+    void setText(CString text);
 private:
 
     ULONG_PTR gdiplusToken_;
@@ -66,6 +67,7 @@ private:
 
     double seconds_ = 0.2;
 
+    CString text_;
     void ChangeState(State state, COLORREF default_color, COLORREF target_color);
 public:
     DECLARE_MESSAGE_MAP()

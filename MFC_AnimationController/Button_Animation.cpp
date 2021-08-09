@@ -84,6 +84,11 @@ bool Button_Animation::showImage(size_t index)
 	return true;
 }
 
+void Button_Animation::setText(CString text)
+{
+	text_ = text;
+}
+
 BEGIN_MESSAGE_MAP(Button_Animation, CWnd)
 	ON_WM_MOUSELEAVE()
 	ON_WM_PAINT()
@@ -150,9 +155,9 @@ void Button_Animation::OnPaint()
 
 	/*Draw background*/
 	memG.FillRectangle(&brush_rect, Gdiplus::Rect(rc.left, rc.top, rc.Width(), rc.Height()));
-	
+
 	/*Draw border*/
-	if (borderColor_ != MAXDWORD)
+	if(borderColor_ != MAXDWORD)
 	{
 		Gdiplus::Pen borderPen(Gdiplus::Color(GetRValue(borderColor_), GetGValue(borderColor_), GetBValue(borderColor_)), borderWidth_);
 		memG.DrawRectangle(&borderPen, Gdiplus::Rect(rc.left, rc.top, rc.Width(), rc.Height()));
@@ -176,9 +181,19 @@ void Button_Animation::OnPaint()
 			{
 				horizontalScalingFactor = controlWidth / imageWidth;
 			}
+			else
+			{
+				horizontalScalingFactor = imageWidth / controlWidth;
+			}
+
 			if (imageHeight > controlHeight)
 			{
 				verticalScalingFactor = controlHeight / imageHeight;
+			}
+			else
+			{
+				verticalScalingFactor = imageHeight / controlHeight;
+
 			}
 
 			float scalingFactor = 0;
@@ -191,17 +206,17 @@ void Button_Animation::OnPaint()
 				scalingFactor = verticalScalingFactor;
 			}
 
-			scalingFactor = scalingFactor * 0.9;
+			scalingFactor = scalingFactor * 0.9f;
 
 			if (scalingFactor != 0)
 			{
-				Gdiplus::Image* img = new Gdiplus::Bitmap((int)controlWidth * 0.9, (int)controlHeight * 0.9);
+				Gdiplus::Image* img = new Gdiplus::Bitmap(static_cast<int>(controlWidth * 0.9f), static_cast<int>(controlHeight * 0.9f));
 				Gdiplus::Graphics g(img);
 				g.ScaleTransform(scalingFactor, scalingFactor);
 				g.DrawImage(imageList[imageIndex].get(), 0, 0);
 
-				float width = imageList[imageIndex]->GetWidth() * scalingFactor;
-				float height = imageList[imageIndex]->GetHeight() * scalingFactor;
+				float width = imageList[imageIndex]->GetWidth()* scalingFactor;
+				float height = imageList[imageIndex]->GetHeight()* scalingFactor;
 
 				float marginLeft = (controlWidth - width) / 2;
 				float marginTop = (controlHeight - height) / 2;
@@ -211,10 +226,10 @@ void Button_Animation::OnPaint()
 		}
 
 	}
-	CString text;
-	GetWindowText(text);
+	//CString text;
+	//GetWindowText(text);
 
-	memG.DrawString(text, text.GetLength(), &gpFont, Gdiplus::RectF(rc.left, rc.top, rc.Width(), rc.Height()), &stringFormat_, &brush_text);
+	memG.DrawString(text_, text_.GetLength(), &gpFont, Gdiplus::RectF(static_cast<float>(rc.left), static_cast<float>(rc.top), static_cast<float>(rc.Width()), static_cast<float>(rc.Height())), &stringFormat_, &brush_text);
 
 	graphics.DrawImage(&memBmp, 0, 0);
 }
