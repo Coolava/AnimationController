@@ -14,7 +14,11 @@ public:
 	void setTextColor(COLORREF color);
 	void setTextAlign(Gdiplus::StringAlignment align);
 
+	void setCheckedState(bool check);
+	bool getChecked() { return (checkedState_ == State::Checked ? true : false); }
 
+	bool isEnable() { return enable_; }
+	void enable(bool enable);
 private:
 
 	ULONG_PTR gdiplusToken_;
@@ -29,6 +33,7 @@ private:
 	enum class State { None , Checked};
 	State checkedState_ = State::None;
 
+	bool enable_ = false;
 
 	DECLARE_MESSAGE_MAP()
 	afx_msg void OnPaint();
@@ -36,5 +41,6 @@ private:
 
 public:
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 };
 

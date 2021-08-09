@@ -3,6 +3,8 @@
 BEGIN_MESSAGE_MAP(CheckBox, CWnd)
 	ON_WM_PAINT()
 	ON_WM_LBUTTONUP()
+	ON_WM_LBUTTONDOWN()
+
 END_MESSAGE_MAP()
 
 
@@ -23,6 +25,19 @@ void CheckBox::setTextAlign(Gdiplus::StringAlignment align)
 {
 	stringFormat_.SetAlignment(align);
 	stringFormat_.SetLineAlignment(Gdiplus::StringAlignment::StringAlignmentCenter);
+}
+
+void CheckBox::setCheckedState(bool check)
+{
+	if (check == true)
+		checkedState_ = State::Checked;
+	else
+		checkedState_ = State::None;
+}
+
+void CheckBox::enable(bool enable)
+{
+	enable_ = enable;
 }
 
 void CheckBox::setCheckColor(COLORREF color)
@@ -70,25 +85,25 @@ void CheckBox::OnPaint()
 	GetWindowText(text);
 
 	Gdiplus::RectF textBox;
-	memG.MeasureString(text, text.GetLength(), &gpFont, Gdiplus::RectF(rc.left, rc.top, rc.Width(), rc.Height()), &stringFormat_, &textBox);
+	memG.MeasureString(text, text.GetLength(), &gpFont, Gdiplus::RectF(static_cast<float>(rc.left), static_cast<float>(rc.top), static_cast<float>(rc.Width()), static_cast<float>(rc.Height())), &stringFormat_, &textBox);
 	
 	CRect rcText = rc;
-	Gdiplus::Rect rcBox(rc.left, rc.top, rc.Width(), rc.Height());
+	Gdiplus::RectF rcBox(static_cast<float>(rc.left), static_cast<float>(rc.top), static_cast<float>(rc.Width()), static_cast<float>(rc.Height()));
 	if (stringFormat_.GetAlignment() == Gdiplus::StringAlignmentNear)
 	{
-		rcText.right -= textBox.Height;
-		rcBox.X = rcText.right;
+		rcText.right -= static_cast<long>(textBox.Height);
+		rcBox.X = static_cast<float>(rcText.right);
 	}
 	else
 	{
-		rcText.left -= textBox.Height;
-		rcBox.X = rc.left;
+		rcText.left -= static_cast<long>(textBox.Height);
+		rcBox.X = static_cast<float>(rc.left);
 	}
 	rcBox.Width = textBox.Height;
 	rcBox.Y = rc.top + (rc.Height() - textBox.Height) / 2;
 	rcBox.Height = textBox.Height;
 
-	memG.DrawString(text, text.GetLength(), &gpFont, Gdiplus::RectF(rcText.left, rcText.top, rcText.Width(), rcText.Height()), &stringFormat_, &brush_text);
+	memG.DrawString(text, text.GetLength(), &gpFont, Gdiplus::RectF(static_cast<float>(rcText.left), static_cast<float>(rcText.top), static_cast<float>(rcText.Width()), static_cast<float>(rcText.Height())), &stringFormat_, &brush_text);
 
 	////////////////////////////////////////////////////////////////////////////////////////
 
@@ -98,11 +113,11 @@ void CheckBox::OnPaint()
 
 	if (checkedState_ == State::Checked)
 	{
-		Gdiplus::Rect rcCheck(rcBox);
-		rcCheck.X = rcCheck.X + rcCheck.Width * 0.2;
-		rcCheck.Y = rcCheck.Y + rcCheck.Height * 0.2;
-		rcCheck.Width *= 0.6;
-		rcCheck.Height *= 0.6;
+		Gdiplus::RectF rcCheck(rcBox);
+		rcCheck.X = rcCheck.X + rcCheck.Width * 0.2f;
+		rcCheck.Y = rcCheck.Y + rcCheck.Height * 0.2f;
+		rcCheck.Width *= 0.6f;
+		rcCheck.Height *= 0.6f;
 
 		Gdiplus::SolidBrush brush_check(Gdiplus::Color(GetRValue(checkColor_), GetGValue(checkColor_), GetBValue(checkColor_)));
 		memG.FillEllipse(&brush_check, rcCheck);
@@ -115,9 +130,17 @@ void CheckBox::OnPaint()
 
 void CheckBox::OnLButtonUp(UINT nFlags, CPoint point)
 {
-	// TODO: Add your message handler code here and/or call default
-
-	checkedState_ == State::None ? checkedState_ = State::Checked : checkedState_ = State::None;
-	Invalidate();
 	CWnd::OnLButtonUp(nFlags, point);
+	if (enable_ == true)
+	{
+		checkedState_ == State::None ? checkedState_ = State::Checked : checkedState_ = State::None;
+		Invalidate();
+	}
+}
+
+
+void CheckBox::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	
+	CWnd::OnLButtonDown(nFlags, point);
 }
