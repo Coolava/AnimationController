@@ -131,7 +131,7 @@ void Circle_Progress::OnPaint()
 
 	CPoint center = rc.CenterPoint();
 
-	int radius = (rc.Width() > rc.Height() ? rc.Height() / 2 : rc.Width() / 2) * 0.7;/*0.7Àº ¹¹Áö .. ?*/
+	double radius = (rc.Width() > rc.Height() ? rc.Height() / 2 : rc.Width() / 2) * 0.7;
 
 	for (int i = 0; i < ballCount_; i++)
 	{
