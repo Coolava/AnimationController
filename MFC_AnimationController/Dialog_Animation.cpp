@@ -120,7 +120,15 @@ BOOL Dialog_Animation::OnInitDialog()
 	SetBackgroundColor(RGB(65, 65, 68));
 
 	buttonLeft.setTextAlign(Gdiplus::StringAlignment::StringAlignmentCenter);
+	buttonLeft.setText(_T("<--"));
+	buttonLeft.setBackGroundColor(RGB(65, 65, 68));
+	buttonLeft.setHighlightColor(0x3C3C3C);
+
 	buttonRight.setTextAlign(Gdiplus::StringAlignment::StringAlignmentCenter);
+	buttonRight.setText(_T("-->"));
+	buttonRight.setBackGroundColor(RGB(65, 65, 68));
+	buttonRight.setHighlightColor(0x3C3C3C);
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
 }

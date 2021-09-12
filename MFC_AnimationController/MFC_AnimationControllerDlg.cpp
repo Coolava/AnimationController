@@ -31,7 +31,6 @@ void CMFCAnimationControllerDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_STATIC_ANIMATION3, animation3_);
 	DDX_Control(pDX, IDC_STATIC_ANIMATION4, circleProgress_);
 	DDX_Control(pDX, IDC_STATIC_LED, led_);
-	DDX_Control(pDX, IDC_CHECK1, checkBox_);
 }
 
 BEGIN_MESSAGE_MAP(CMFCAnimationControllerDlg, CDialogEx)
@@ -62,11 +61,20 @@ BOOL CMFCAnimationControllerDlg::OnInitDialog()
 	circleProgress_.setBallDistanceDegree(30.0);
 	circleProgress_.setAnimationSeconds(3.0);
 
+	
+	animation_.loadImages({ _T("res\\Icon Power Off.png") , _T("res\\Icon Power On.png") });
+	//animation_.showImage(0);
 
-	animation_.loadImages({ _T("res\\Icon Power On.png") });
-	animation_.showImage(0);
+	animation2_.setText(_T("Animation Dialog"));
+	animation2_.setTextAlign(Gdiplus::StringAlignment::StringAlignmentCenter);
+
+
+	animation3_.setText(_T("Change LED"));
+	animation3_.setTextAlign(Gdiplus::StringAlignment::StringAlignmentCenter);
+
 
 	SetBackgroundColor(RGB(45, 45, 48));
+
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
 
@@ -112,11 +120,13 @@ void CMFCAnimationControllerDlg::OnStnClickedStaticAnimation()
 	{
 		KillTimer(10);
 		circleProgress_.stop();
+		animation_.showImage(0);
 	}
 	else
 	{
 		circleProgress_.start();
 		SetTimer(10, 1000, NULL);
+		animation_.showImage(1);
 	}
 
 }
