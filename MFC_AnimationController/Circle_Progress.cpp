@@ -70,10 +70,28 @@ void Circle_Progress::stop()
 {
 	state_ = State::Stop;
 }
-void Circle_Progress::setText(CString text)
+void Circle_Progress::SetWindowTextA(LPCSTR lpString)
 {
-	text_ = text;
+	isSetText = true;
+	text_ = lpString;
 }
+
+void Circle_Progress::SetWindowTextW(LPCWSTR lpString)
+{
+	isSetText = true;
+	text_ = lpString;
+}
+
+void Circle_Progress::GetWindowTextA(LPSTR& lpString)
+{
+	//lpString = text_.GetBuffer();
+}
+
+void Circle_Progress::GetWindowTextW(LPWSTR& lpString)
+{
+	lpString = text_.GetBuffer();
+}
+
 void Circle_Progress::setAlignment(StringAlignment alignment)
 {
 	format_.SetAlignment(alignment);
@@ -148,8 +166,12 @@ void Circle_Progress::OnPaint()
 		degree -= distance_;
 	}
 
+	CString text = text_;
+	if (isSetText == false)
+		CWnd::GetWindowText(text);
 
-	memG.DrawString(text_, text_.GetLength(), &font_, rectF, &format_, &brushEllipse);
+
+	memG.DrawString(text, text.GetLength(), &font_, rectF, &format_, &brushEllipse);
 
 	graphics.DrawImage(&memBmp, 0, 0);
 }
@@ -160,8 +182,8 @@ BOOL Circle_Progress::PreTranslateMessage(MSG* pMsg)
 	// TODO: Add your specialized code here and/or call the base class
 	if (pMsg->message == WM_PAINT)
 	{
-		static int cnt = 0;
-		text_.Format(_T("%d"), cnt++);
+		//static int cnt = 0;
+		//text_.Format(_T("%d"), cnt++);
 	}
 	return __super::PreTranslateMessage(pMsg);
 }

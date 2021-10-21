@@ -3,7 +3,9 @@
 #include "OleInitializer.h"
 #include <gdiplus.h>
 #pragma comment (lib,"Gdiplus.lib")
+
 using StringAlignment = Gdiplus::StringAlignment;
+
 class Circle_Progress :
     public OleInitializer, public CWnd
 {
@@ -14,6 +16,7 @@ public:
     enum class State : int { Stop, InProgress };
     void setBackGroundColor(COLORREF color);
     void setInnerColor(COLORREF color);
+    /*For 360 degrees*/
     void setAnimationSeconds(double seconds);
     void setBallCount(int count);
     void setBallSize(double size);
@@ -22,7 +25,12 @@ public:
     void start();
     void stop();
 
-    void setText(CString text);
+    void SetWindowTextA(LPCSTR lpString);
+    void SetWindowTextW(LPCWSTR lpString);
+
+    void GetWindowTextA(LPSTR& lpString);
+    void GetWindowTextW(LPWSTR& lpString);
+
     void setAlignment(StringAlignment alignment);
     void setLineAlignment(StringAlignment alignment);
 private:
@@ -45,6 +53,8 @@ private:
 
     Gdiplus::StringFormat format_;
     Gdiplus::Font font_;
+
+    bool isSetText = false;
     CString text_;
 public:
     DECLARE_MESSAGE_MAP()

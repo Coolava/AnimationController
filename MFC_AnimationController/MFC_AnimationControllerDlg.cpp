@@ -171,7 +171,8 @@ void CMFCAnimationControllerDlg::OnTimer(UINT_PTR nIDEvent)
 		CString str;
 		str.Format(_T("%d"), progress_++);
 		/*CircleProgress*/
-		circleProgress_.setText(str);
+		circleProgress_.SetWindowText(str);
+		//circleProgress_.Invalidate();
 	}
 	}
 	CDialogEx::OnTimer(nIDEvent);
