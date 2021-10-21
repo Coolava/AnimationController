@@ -4,7 +4,7 @@
 
 #pragma once
 #include "Button_Animation.h"
-#include "Circle_Progress.h"
+#include "CircleStatus.h"
 #include "Dialog_Animation.h"
 #include "LedControl.h"
 #include <memory>
@@ -40,7 +40,7 @@ protected:
 	Button_Animation animation3_;
 
 	int progress_;
-	Circle_Progress circleProgress_;
+	CircleStatus circleProgress_;
 
 	std::unique_ptr<Dialog_Animation> dialog_animation_;
 

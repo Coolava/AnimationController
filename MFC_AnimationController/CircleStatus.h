@@ -6,12 +6,12 @@
 
 using StringAlignment = Gdiplus::StringAlignment;
 
-class Circle_Progress :
+class CircleStatus :
     public OleInitializer, public CWnd
 {
 public:
-    Circle_Progress();
-    virtual ~Circle_Progress();
+    CircleStatus();
+    virtual ~CircleStatus();
 
     enum class State : int { Stop, InProgress };
     void setBackGroundColor(COLORREF color);

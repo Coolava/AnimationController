@@ -1,8 +1,8 @@
-#include "Circle_Progress.h"
+#include "CircleStatus.h"
 
 constexpr double pi = 3.141592653589793238462643383279502884L;
 
-Circle_Progress::Circle_Progress()
+CircleStatus::CircleStatus()
 	:font_(Gdiplus::FontFamily::GenericMonospace(),10)
 {
 	GdiplusStartup(&gdiplusToken_, &gdiplusStartupInput_, NULL);
@@ -15,42 +15,42 @@ Circle_Progress::Circle_Progress()
 
 }
 
-Circle_Progress::~Circle_Progress()
+CircleStatus::~CircleStatus()
 {
 	Gdiplus::GdiplusShutdown(gdiplusToken_);
 }
 
-void Circle_Progress::setBackGroundColor(COLORREF color)
+void CircleStatus::setBackGroundColor(COLORREF color)
 {
 	backgroundColor_ = color;
 }
 
-void Circle_Progress::setInnerColor(COLORREF color)
+void CircleStatus::setInnerColor(COLORREF color)
 {
 	ballColor_ = color;
 }
 
-void Circle_Progress::setAnimationSeconds(double seconds)
+void CircleStatus::setAnimationSeconds(double seconds)
 {
 	seconds_ = seconds;
 }
 
-void Circle_Progress::setBallCount(int count)
+void CircleStatus::setBallCount(int count)
 {
 	ballCount_ = count;
 }
 
-void Circle_Progress::setBallSize(double size)
+void CircleStatus::setBallSize(double size)
 {
 	ballSize_ = size;
 }
 
-void Circle_Progress::setBallDistanceDegree(double degree)
+void CircleStatus::setBallDistanceDegree(double degree)
 {
 	distance_ = degree;
 }
 
-void Circle_Progress::start()
+void CircleStatus::start()
 {
 	state_ = State::InProgress;
 	animation_controller_.CleanUpGroup(1);
@@ -66,46 +66,46 @@ void Circle_Progress::start()
 	animation_controller_.AnimateGroup(1);
 }
 
-void Circle_Progress::stop()
+void CircleStatus::stop()
 {
 	state_ = State::Stop;
 }
-void Circle_Progress::SetWindowTextA(LPCSTR lpString)
+void CircleStatus::SetWindowTextA(LPCSTR lpString)
 {
 	isSetText = true;
 	text_ = lpString;
 }
 
-void Circle_Progress::SetWindowTextW(LPCWSTR lpString)
+void CircleStatus::SetWindowTextW(LPCWSTR lpString)
 {
 	isSetText = true;
 	text_ = lpString;
 }
 
-void Circle_Progress::GetWindowTextA(LPSTR& lpString)
+void CircleStatus::GetWindowTextA(LPSTR& lpString)
 {
 	//lpString = text_.GetBuffer();
 }
 
-void Circle_Progress::GetWindowTextW(LPWSTR& lpString)
+void CircleStatus::GetWindowTextW(LPWSTR& lpString)
 {
 	lpString = text_.GetBuffer();
 }
 
-void Circle_Progress::setAlignment(StringAlignment alignment)
+void CircleStatus::setAlignment(StringAlignment alignment)
 {
 	format_.SetAlignment(alignment);
 }
-void Circle_Progress::setLineAlignment(StringAlignment alignment)
+void CircleStatus::setLineAlignment(StringAlignment alignment)
 {
 	format_.SetLineAlignment(alignment);
 }
-BEGIN_MESSAGE_MAP(Circle_Progress, CWnd)
+BEGIN_MESSAGE_MAP(CircleStatus, CWnd)
 	ON_WM_PAINT()
 END_MESSAGE_MAP()
 
 
-void Circle_Progress::OnPaint()
+void CircleStatus::OnPaint()
 {
 	CPaintDC dc(this); // device context for painting
 					   // TODO: Add your message handler code here
@@ -177,7 +177,7 @@ void Circle_Progress::OnPaint()
 }
 
 
-BOOL Circle_Progress::PreTranslateMessage(MSG* pMsg)
+BOOL CircleStatus::PreTranslateMessage(MSG* pMsg)
 {
 	// TODO: Add your specialized code here and/or call the base class
 	if (pMsg->message == WM_PAINT)

@@ -116,7 +116,7 @@ HCURSOR CMFCAnimationControllerDlg::OnQueryDragIcon()
 
 void CMFCAnimationControllerDlg::OnStnClickedStaticAnimation()
 {
-	if (circleProgress_.getState() == Circle_Progress::State::InProgress)
+	if (circleProgress_.getState() == CircleStatus::State::InProgress)
 	{
 		KillTimer(10);
 		circleProgress_.stop();

@@ -42,7 +42,7 @@
     <ClInclude Include="Button_Animation.h">
       <Filter>Animation Control</Filter>
     </ClInclude>
-    <ClInclude Include="Circle_Progress.h">
+    <ClInclude Include="CircleStatus.h">
       <Filter>Animation Control</Filter>
     </ClInclude>
     <ClInclude Include="OleInitializer.h">
@@ -71,7 +71,7 @@
     <ClCompile Include="Button_Animation.cpp">
       <Filter>Animation Control</Filter>
     </ClCompile>
-    <ClCompile Include="Circle_Progress.cpp">
+    <ClCompile Include="CircleStatus.cpp">
       <Filter>Animation Control</Filter>
     </ClCompile>
     <ClCompile Include="OleInitializer.cpp">
