@@ -10,7 +10,7 @@ MFC로 제작한 App에도 WPF의 Storyboard와 같은 이펙트를 넣어보고
 * Visual studio 2022 (v143)
 
 ## Contents
-- Button/
+- Button
   - 마우스가 컨트롤 위에 Hover 상태 일 때 `Hightlight` 기능
   - 컨트롤에 손쉽게 이미지 삽입 할 수 있는 `loadImages` 함수 추가
 - Circle Progress
